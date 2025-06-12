@@ -1,183 +1,62 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
+  <title>NeuraGuard - Sempre a protegê-lo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NeuraGuard - Proteção com Inteligência Artificial</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    header {
-      background-color: #0a0f2c;
-      color: #fff;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    header h1 {
-      font-size: 28px;
-      color: #f7931e;
-    }
-
-    nav a {
-      color: #fff;
-      margin-left: 20px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #f7931e;
-    }
-
-    .hero {
-      background: linear-gradient(to right, #1b1f4b, #202654);
-      color: white;
-      padding: 100px 40px;
-      text-align: center;
-    }
-
-    .hero h2 {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 20px;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      background-color: #f7931e;
-      color: white;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background-color 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #d86d00;
-    }
-
-    section {
-      padding: 60px 40px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    section h2 {
-      font-size: 32px;
-      color: #1b1f4b;
-      margin-bottom: 20px;
-    }
-
-    section ul {
-      margin-left: 20px;
-      list-style: disc;
-    }
-
-    footer {
-      background-color: #0a0f2c;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 768px) {
-      .hero h2 {
-        font-size: 32px;
-      }
-
-      nav {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
-      }
-
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+  <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-  <h1>NeuraGuard</h1>
+  <img src="logo.png" alt="Logo NeuraGuard">
   <nav>
     <a href="#sobre">Sobre</a>
-    <a href="#publico">Público-Alvo</a>
-    <a href="#funcionalidades">Funcionalidades</a>
-    <a href="#comparacao">Comparação</a>
+    <a href="#publico">Público</a>
+    <a href="#func">Funcionalidades</a>
     <a href="#ia">IA</a>
-    <a href="#conclusao">Conclusão</a>
+    <a href="#comparacao">Comparação</a>
   </nav>
 </header>
 
 <section class="hero">
-  <h2>Proteção Inteligente com NeuraGuard</h2>
-  <p>O antivírus do futuro, hoje — mais seguro, mais rápido, mais inteligente.</p>
-  <a href="#funcionalidades" class="btn">Ver Funcionalidades</a>
+  <img src="logo.png" alt="Logo NeuraGuard">
+  <h1>NEURAGUARD</h1>
+  <p>SEMPRE a PROTEGÊ-LO</p>
+  <a href="#func" class="btn">Explorar Funcionalidades</a>
 </section>
 
 <section id="sobre">
-  <h2>O que é o NeuraGuard?</h2>
-  <p>NeuraGuard é um antivírus de última geração que utiliza algoritmos avançados de inteligência artificial para proteger os seus dados de forma inteligente, adaptável e eficaz.</p>
+  <h2><i class="fas fa-shield-alt"></i> O que é o NeuraGuard?</h2>
+  <p>Um antivírus moderno com inteligência artificial, desenvolvido para antecipar e neutralizar ameaças com desempenho superior.</p>
 </section>
 
 <section id="publico">
-  <h2>Público-Alvo</h2>
-  <p>Desenvolvido para utilizadores modernos: desde consumidores domésticos até pequenas empresas e instituições que necessitam de segurança robusta com o mínimo de esforço técnico.</p>
+  <h2><i class="fas fa-users"></i> Público-Alvo</h2>
+  <p>Usuários individuais, pequenas empresas e instituições que valorizam segurança com tecnologia de ponta e simplicidade de uso.</p>
 </section>
 
-<section id="funcionalidades">
-  <h2>Funcionalidades</h2>
+<section id="func" class="icon-section">
+  <h2><i class="fas fa-microchip"></i> Funcionalidades Principais</h2>
   <ul>
-    <li>Monitorização e deteção em tempo real</li>
-    <li>Firewall inteligente baseado em IA</li>
-    <li>Proteção de dados e privacidade</li>
-    <li>Atualizações automáticas baseadas em machine learning</li>
+    <li><i class="fas fa-bolt"></i> Deteção em tempo real com IA</li>
+    <li><i class="fas fa-shield-virus"></i> Proteção contra ransomware</li>
+    <li><i class="fas fa-lock"></i> Proteção de dados pessoais</li>
+    <li><i class="fas fa-sync-alt"></i> Atualizações inteligentes automáticas</li>
   </ul>
 </section>
 
-<section id="comparacao">
-  <h2>Comparação com Antivírus Tradicionais</h2>
-  <p>NeuraGuard ultrapassa os antivírus clássicos ao antecipar ameaças com análise preditiva, reduzindo falsos positivos e mantendo um desempenho superior mesmo em dispositivos mais antigos.</p>
-</section>
-
 <section id="ia">
-  <h2>Recursos com Inteligência Artificial</h2>
-  <p>Com redes neurais e análise comportamental, o NeuraGuard aprende continuamente para se adaptar a novas ameaças. Isso garante proteção mesmo contra malwares ainda desconhecidos.</p>
+  <h2><i class="fas fa-brain"></i> Recursos com Inteligência Artificial</h2>
+  <p>Com redes neurais e análise de comportamento, o NeuraGuard aprende continuamente para proteger contra novas ameaças cibernéticas.</p>
 </section>
 
-<section id="conclusao">
-  <h2>Conclusão</h2>
-  <p>NeuraGuard representa uma nova era na cibersegurança — mais do que um antivírus, é um sistema inteligente de proteção cibernética pensado para o mundo moderno.</p>
+<section id="comparacao">
+  <h2><i class="fas fa-chart-line"></i> Comparação com Antivírus Tradicionais</h2>
+  <p>Ao contrário dos antivírus convencionais, o NeuraGuard analisa padrões e age antes que o vírus cause danos, reduzindo falsos positivos e aumentando a eficácia.</p>
 </section>
 
 <footer>
