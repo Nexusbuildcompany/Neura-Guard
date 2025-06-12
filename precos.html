@@ -5,131 +5,121 @@
   <title>Preços - NeuraGuard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
   <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f4f6fc;
-      margin: 0;
-      padding: 0;
       color: #222;
+      line-height: 1.6;
     }
-
-    header, footer {
+    header {
       background-color: #0a0f2c;
       color: white;
       padding: 20px 40px;
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-
+    nav a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      color: #f7931e;
+    }
     h1 {
-      margin-top: 40px;
-      color: #1b1f4b;
       text-align: center;
+      margin: 40px 0 20px;
+      color: #1b1f4b;
     }
-
-    .planos {
+    .precos-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
-      padding: 40px;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: auto;
+      padding: 0 20px 40px;
     }
-
     .plano {
-      background: white;
-      padding: 30px;
+      background-color: white;
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 30px;
       text-align: center;
     }
-
     .plano h2 {
+      color: #1b1f4b;
       margin-bottom: 10px;
-      color: #0a0f2c;
     }
-
     .preco {
       font-size: 28px;
       color: #f7931e;
-      margin: 20px 0;
+      margin: 15px 0;
     }
-
-    .plano ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 20px;
-    }
-
-    .plano ul li {
-      margin: 10px 0;
-    }
-
     .btn {
       background-color: #f7931e;
       color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
+      padding: 10px 20px;
       text-decoration: none;
-      display: inline-block;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s;
     }
-
     .btn:hover {
       background-color: #d86d00;
+    }
+    footer {
+      background-color: #0a0f2c;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Planos e Preços</h1>
+  <h2>NeuraGuard</h2>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="comparacao.html">Comparação</a>
+    <a href="precos.html">Preços</a>
+  </nav>
 </header>
 
-<section class="planos">
+<h1>Planos e Preços</h1>
 
+<div class="precos-container">
   <div class="plano">
-    <h2><i class="fas fa-user"></i> Pessoal</h2>
-    <p class="preco">€4,99/mês</p>
-    <ul>
-      <li>Proteção em tempo real</li>
-      <li>IA contra ameaças emergentes</li>
-      <li>1 dispositivo</li>
-      <li>Suporte básico</li>
-    </ul>
+    <h2>Plano Pessoal</h2>
+    <p>Ideal para utilizadores individuais.</p>
+    <div class="preco">€4,99 / mês</div>
     <a href="#" class="btn">Subscrever</a>
   </div>
 
   <div class="plano">
-    <h2><i class="fas fa-briefcase"></i> Empresarial</h2>
-    <p class="preco">€14,99/mês</p>
-    <ul>
-      <li>Até 10 dispositivos</li>
-      <li>Gestão centralizada</li>
-      <li>Proteção contra ransomware avançado</li>
-      <li>Suporte prioritário</li>
-    </ul>
+    <h2>Plano Familiar</h2>
+    <p>Protege até 5 dispositivos.</p>
+    <div class="preco">€9,99 / mês</div>
     <a href="#" class="btn">Subscrever</a>
   </div>
 
   <div class="plano">
-    <h2><i class="fas fa-university"></i> Institucional</h2>
-    <p class="preco">€29,99/mês</p>
-    <ul>
-      <li>Proteção para servidores</li>
-      <li>Integração com sistemas internos</li>
-      <li>IA personalizada</li>
-      <li>Suporte técnico dedicado</li>
-    </ul>
+    <h2>Plano Empresas</h2>
+    <p>Segurança para equipas e escritórios.</p>
+    <div class="preco">€19,99 / mês</div>
     <a href="#" class="btn">Contactar</a>
   </div>
-
-</section>
+</div>
 
 <footer>
-  <p>&copy; 2025 NeuraGuard | Todos os direitos reservados</p>
+  <p>&copy; 2025 NeuraGuard | Max Oliveira, Carlos Marques, Salvador Carvalho, Beatriz Ferreira</p>
 </footer>
 
 </body>
