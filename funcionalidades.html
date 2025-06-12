@@ -1,68 +1,118 @@
-<style>
-  .container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 0 20px 40px;
-  }
-  .funcionalidades-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-  }
-  .funcao {
-    background: white;
-    border-radius: 15px;
-    padding: 30px 25px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .funcao:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-  }
-  .funcao i {
-    font-size: 48px;
-    color: #f7931e;
-    margin-bottom: 20px;
-  }
-  .funcao-content h3 {
-    color: #1b1f4b;
-    margin-bottom: 12px;
-    font-size: 22px;
-  }
-  .funcao-content p {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.4;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Funcionalidades - NeuraGuard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f6fc;
+      color: #222;
+    }
+    header {
+      background-color: #0a0f2c;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header img {
+      height: 50px;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #f7931e;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px 40px;
+    }
+    .funcionalidades-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+    .funcao {
+      background: white;
+      border-radius: 15px;
+      padding: 30px 25px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .funcao:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    }
+    .funcao i {
+      font-size: 48px;
+      color: #f7931e;
+      margin-bottom: 20px;
+    }
+    .funcao-content h3 {
+      color: #1b1f4b;
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+    .funcao-content p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
 
 <header>
   <img src="logo.png" alt="Logo NeuraGuard">
   <nav>
     <a href="index.html">Página Principal</a>
-    <a href="#sobre">Sobre</a>
-    <a href="#publico">Público</a>
-    <a href="#func">Funcionalidades</a>
-    <a href="#ia">IA</a>
+    <a href="index.html#sobre">Sobre</a>
+    <a href="index.html#publico">Público</a>
+    <a href="funcionalidades.html">Funcionalidades</a>
+    <a href="index.html#ia">IA</a>
     <a href="comparacao.html">Comparação</a>
     <a href="precos.html">Preços</a>
   </nav>
 </header>
 
-
-
 <div class="container">
+  <h2 style="text-align:center; color:#1b1f4b; margin-bottom:30px;">Funcionalidades Inovadoras</h2>
   <div class="funcionalidades-grid">
     <div class="funcao">
       <i class="fas fa-brain"></i>
       <div class="funcao-content">
         <h3>Deteção em Tempo Real com IA</h3>
-        <p>Utilizamos redes neurais avançadas para identificar ameaças instantaneamente e impedir ataques antes que causem danos.</p>
+        <p>Redes neurais identificam ameaças instantaneamente para prevenir danos.</p>
       </div>
     </div>
 
@@ -70,7 +120,7 @@
       <i class="fas fa-shield-virus"></i>
       <div class="funcao-content">
         <h3>Proteção contra Ransomware</h3>
-        <p>Bloqueamos tentativas de encriptação de dados maliciosas, mantendo os teus ficheiros seguros e acessíveis.</p>
+        <p>Bloqueio de encriptação maliciosa, protegendo os teus ficheiros.</p>
       </div>
     </div>
 
@@ -78,7 +128,7 @@
       <i class="fas fa-user-secret"></i>
       <div class="funcao-content">
         <h3>Privacidade Avançada</h3>
-        <p>Ferramentas para proteger dados pessoais e garantir anonimato durante a navegação.</p>
+        <p>Ferramentas para garantir o anonimato e proteção de dados.</p>
       </div>
     </div>
 
@@ -86,7 +136,7 @@
       <i class="fas fa-sync-alt"></i>
       <div class="funcao-content">
         <h3>Atualizações Inteligentes</h3>
-        <p>Atualizamos automaticamente sem incomodar, com inteligência para priorizar ameaças emergentes.</p>
+        <p>Prioriza ameaças emergentes com atualizações automáticas.</p>
       </div>
     </div>
 
@@ -94,7 +144,7 @@
       <i class="fas fa-cloud-upload-alt"></i>
       <div class="funcao-content">
         <h3>Backup Seguro na Cloud</h3>
-        <p>Guarda versões seguras dos teus ficheiros para recuperação rápida em caso de perda ou ataque.</p>
+        <p>Recuperação rápida com versões protegidas dos teus dados.</p>
       </div>
     </div>
 
@@ -102,8 +152,11 @@
       <i class="fas fa-mobile-alt"></i>
       <div class="funcao-content">
         <h3>Proteção Multi-Plataforma</h3>
-        <p>Compatível com Windows, macOS, Android e iOS para segurança consistente em todos os dispositivos.</p>
+        <p>Segurança em Windows, macOS, Android e iOS.</p>
       </div>
     </div>
   </div>
 </div>
+
+</body>
+</html>
