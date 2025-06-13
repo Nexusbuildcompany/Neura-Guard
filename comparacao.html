@@ -12,6 +12,7 @@
       font-family: 'Inter', sans-serif;
       background-color: #f4f6fc;
       color: #222;
+      transition: background-color 0.3s, color 0.3s;
     }
     header {
       background-color: #0a0f2c;
@@ -35,6 +36,20 @@
       transition: color 0.3s;
     }
     nav a:hover {
+      color: #f7931e;
+    }
+
+    /* Botão modo escuro */
+    #darkModeToggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      margin-left: 20px;
+      transition: color 0.3s;
+    }
+    #darkModeToggle:hover {
       color: #f7931e;
     }
 
@@ -68,12 +83,14 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      transition: background-color 0.3s, color 0.3s;
     }
 
     th, td {
       padding: 14px 20px;
       border: 1px solid #e0e0e0;
       text-align: center;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     th {
@@ -98,10 +115,41 @@
         flex-direction: column;
         align-items: flex-start;
       }
-
       nav {
         margin-top: 10px;
       }
+    }
+
+    /* Estilos modo escuro */
+    body.dark-mode {
+      background-color: #121621;
+      color: #ddd;
+    }
+    body.dark-mode header {
+      background-color: #181f3d;
+      color: #ddd;
+    }
+    body.dark-mode nav a {
+      color: #ddd;
+    }
+    body.dark-mode nav a:hover {
+      color: #f7931e;
+    }
+    body.dark-mode table {
+      background-color: #1e2437;
+      color: #ddd;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.7);
+    }
+    body.dark-mode th {
+      background-color: #121921;
+      color: #f7931e;
+    }
+    body.dark-mode tr:nth-child(even) {
+      background-color: #2a3044;
+    }
+    body.dark-mode td:first-child {
+      background-color: #242a44;
+      color: #f7931e;
     }
   </style>
 </head>
@@ -115,8 +163,8 @@
     <a href="funcionalidades.html">Funcionalidades</a>
     <a href="precos.html">Preços</a>
     <a href="feedback.html">Feedback</a>
-
   </nav>
+  <button id="darkModeToggle" title="Alternar Modo Escuro"><i class="fas fa-moon"></i></button>
 </header>
 
 <div class="container">
@@ -156,6 +204,26 @@
     </table>
   </div>
 </div>
+
+<script>
+  const toggleBtn = document.getElementById('darkModeToggle');
+  const body = document.body;
+
+  // Verifica o estado salvo no localStorage
+  if(localStorage.getItem('modoEscuro') === 'ativo') {
+    body.classList.add('dark-mode');
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+
+    if(body.classList.contains('dark-mode')) {
+      localStorage.setItem('modoEscuro', 'ativo');
+    } else {
+      localStorage.removeItem('modoEscuro');
+    }
+  });
+</script>
 
 </body>
 </html>
