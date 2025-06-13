@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Comparação - NeuraGuard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,6 +48,10 @@
       cursor: pointer;
       margin-left: 20px;
       transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
     }
     #darkModeToggle:hover {
       color: #f7931e;
@@ -156,7 +160,7 @@
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo NeuraGuard">
+  <img src="logo.png" alt="Logo NeuraGuard" />
   <nav>
     <a href="index.html">Página Principal</a>
     <a href="sobre.html">Sobre</a>
@@ -164,7 +168,9 @@
     <a href="precos.html">Preços</a>
     <a href="feedback.html">Feedback</a>
   </nav>
-  <button id="darkModeToggle" title="Alternar Modo Escuro"><i class="fas fa-moon"></i></button>
+  <button id="darkModeToggle" title="Alternar Modo Escuro">
+    <i class="fas fa-moon"></i> Modo Escuro
+  </button>
 </header>
 
 <div class="container">
@@ -193,37 +199,31 @@
         <tr><td>Backup na Cloud</td><td>✔️</td><td>❌</td><td>✔️</td><td>✔️</td><td>❌</td><td>❌</td></tr>
         <tr><td>Protecção Multi-Plataforma</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>Parcial</td></tr>
         <tr><td>Privacidade e anonimato online</td><td>✔️</td><td>❌</td><td>✔️</td><td>❌</td><td>❌</td><td>❌</td></tr>
-        <tr><td>VPN integrada</td><td>✔️</td><td>❌</td><td>✔️</td><td>✔️</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Firewall inteligente</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
-        <tr><td>Controlo parental</td><td>✔️</td><td>❌</td><td>✔️</td><td>✔️</td><td>✔️</td><td>❌</td></tr>
-        <tr><td>Protecção contra phishing</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
-        <tr><td>Protecção de webcam</td><td>✔️</td><td>❌</td><td>✔️</td><td>✔️</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Modo jogo</td><td>✔️</td><td>✔️</td><td>❌</td><td>✔️</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Deteção offline</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+        <tr><td>Interface amigável</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+        <tr><td>Suporte técnico 24/7</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>Limitado</td></tr>
+        <tr><td>Actualizações baseadas em Machine Learning</td><td>✔️</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
       </tbody>
     </table>
   </div>
 </div>
 
 <script>
-  const toggleBtn = document.getElementById('darkModeToggle');
-  const body = document.body;
-
-  // Verifica o estado salvo no localStorage
-  if(localStorage.getItem('modoEscuro') === 'ativo') {
-    body.classList.add('dark-mode');
-  }
-
-  toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-
-    if(body.classList.contains('dark-mode')) {
-      localStorage.setItem('modoEscuro', 'ativo');
+  const toggleButton = document.getElementById('darkModeToggle');
+  toggleButton.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const icon = toggleButton.querySelector('i');
+    if (document.body.classList.contains('dark-mode')) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+      toggleButton.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
     } else {
-      localStorage.removeItem('modoEscuro');
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+      toggleButton.innerHTML = '<i class="fas fa-moon"></i> Modo Escuro';
     }
   });
 </script>
 
 </body>
 </html>
+
