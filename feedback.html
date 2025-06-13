@@ -4,17 +4,39 @@
   <meta charset="UTF-8">
   <title>Feedback - NeuraGuard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f4f6fc;
-      margin: 0;
-      padding: 0;
+      color: #222;
+      line-height: 1.6;
     }
     header {
       background-color: #0a0f2c;
       color: white;
       padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header img {
+      height: 50px;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #f7931e;
     }
     .container {
       max-width: 600px;
@@ -27,6 +49,7 @@
     h2 {
       text-align: center;
       color: #1b1f4b;
+      margin-bottom: 20px;
     }
     form {
       display: flex;
@@ -42,6 +65,7 @@
       margin-top: 5px;
       border: 1px solid #ccc;
       border-radius: 8px;
+      font-family: 'Inter', sans-serif;
     }
     button {
       background-color: #f7931e;
@@ -52,16 +76,34 @@
       font-size: 16px;
       margin-top: 20px;
       cursor: pointer;
+      font-family: 'Inter', sans-serif;
     }
     button:hover {
       background-color: #d86d00;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>NeuraGuard - Feedback</h1>
+  <img src="logo.png" alt="Logo NeuraGuard">
+  <nav>
+    <a href="index.html">Página Principal</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="funcionalidades.html">Funcionalidades</a>
+    <a href="comparacao.html">Comparação</a>
+    <a href="precos.html">Preços</a>
+    <a href="feedback.html">Feedback</a>
+  </nav>
 </header>
 
 <div class="container">
