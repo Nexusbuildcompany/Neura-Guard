@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback - NeuraGuard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f6fc;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #0a0f2c;
+      color: white;
+      padding: 20px 40px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #1b1f4b;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #1b1f4b;
+    }
+    input, textarea {
+      padding: 12px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #f7931e;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #d86d00;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>NeuraGuard - Feedback</h1>
+</header>
+
+<div class="container">
+  <h2>Envia-nos o teu feedback</h2>
+  <form action="https://formspree.io/f/xovwdbko" method="POST">
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" id="nome" required>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="mensagem">Mensagem:</label>
+    <textarea name="mensagem" id="mensagem" rows="6" required></textarea>
+
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+
+</body>
+</html>
