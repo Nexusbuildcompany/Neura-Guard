@@ -5,16 +5,16 @@
   <title>Preços - NeuraGuard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
   <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f4f6fc;
       color: #222;
       line-height: 1.6;
     }
+
     header {
       background-color: #0a0f2c;
       color: white;
@@ -23,20 +23,33 @@
       justify-content: space-between;
       align-items: center;
     }
+
     nav a {
       color: white;
       margin-left: 20px;
       text-decoration: none;
       font-weight: 600;
+      transition: color 0.3s;
     }
+
     nav a:hover {
       color: #f7931e;
     }
+
     h1 {
       text-align: center;
-      margin: 40px 0 20px;
+      margin: 40px 0 10px;
       color: #1b1f4b;
+      font-size: 32px;
     }
+
+    .subtitulo {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #555;
+      font-size: 18px;
+    }
+
     .precos-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -45,40 +58,75 @@
       margin: auto;
       padding: 0 20px 40px;
     }
+
     .plano {
       background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
       padding: 30px;
       text-align: center;
+      transition: transform 0.3s;
     }
+
+    .plano:hover {
+      transform: translateY(-5px);
+    }
+
     .plano h2 {
       color: #1b1f4b;
       margin-bottom: 10px;
+      font-size: 22px;
     }
+
+    .plano i {
+      font-size: 32px;
+      color: #f7931e;
+      margin-bottom: 15px;
+    }
+
     .preco {
       font-size: 28px;
       color: #f7931e;
       margin: 15px 0;
+      font-weight: 700;
     }
+
+    .plano p {
+      color: #444;
+      font-size: 16px;
+    }
+
     .btn {
+      display: inline-block;
       background-color: #f7931e;
       color: white;
-      padding: 10px 20px;
+      padding: 12px 24px;
+      margin-top: 20px;
       text-decoration: none;
       border-radius: 8px;
       font-weight: bold;
       transition: background-color 0.3s;
     }
+
     .btn:hover {
       background-color: #d86d00;
     }
+
     footer {
       background-color: #0a0f2c;
       color: white;
       text-align: center;
       padding: 20px;
       margin-top: 40px;
+    }
+
+    @media (max-width: 500px) {
+      .plano {
+        padding: 20px;
+      }
+      .preco {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
@@ -94,26 +142,30 @@
   </nav>
 </header>
 
-<h1>Planos e Preços</h1>
+<h1><i class="fas fa-tags"></i> Planos e Preços</h1>
+<p class="subtitulo">Escolhe o plano que se adapta às tuas necessidades.</p>
 
 <div class="precos-container">
   <div class="plano">
+    <i class="fas fa-user"></i>
     <h2>Plano Pessoal</h2>
-    <p>Ideal para utilizadores individuais.</p>
+    <p>Protecção completa para 1 dispositivo, com inteligência artificial, firewall e detecção em tempo real.</p>
     <div class="preco">€4,99 / mês</div>
     <a href="#" class="btn">Subscrever</a>
   </div>
 
   <div class="plano">
+    <i class="fas fa-users"></i>
     <h2>Plano Familiar</h2>
-    <p>Protege até 5 dispositivos.</p>
+    <p>Ideal para famílias – protege até 5 dispositivos com controlo parental e sincronização entre plataformas.</p>
     <div class="preco">€9,99 / mês</div>
     <a href="#" class="btn">Subscrever</a>
   </div>
 
   <div class="plano">
+    <i class="fas fa-building"></i>
     <h2>Plano Empresas</h2>
-    <p>Segurança para equipas e escritórios.</p>
+    <p>Para equipas e escritórios – inclui gestão centralizada, suporte prioritário e proteção avançada.</p>
     <div class="preco">€19,99 / mês</div>
     <a href="#" class="btn">Contactar</a>
   </div>

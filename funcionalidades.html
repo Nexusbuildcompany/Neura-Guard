@@ -12,6 +12,7 @@
       font-family: 'Inter', sans-serif;
       background-color: #f4f6fc;
       color: #222;
+      line-height: 1.6;
     }
     header {
       background-color: #0a0f2c;
@@ -24,9 +25,7 @@
       top: 0;
       z-index: 1000;
     }
-    header img {
-      height: 50px;
-    }
+    header img { height: 50px; }
     nav a {
       color: #fff;
       margin-left: 20px;
@@ -34,22 +33,30 @@
       font-weight: 600;
       transition: color 0.3s;
     }
-    nav a:hover {
-      color: #f7931e;
-    }
+    nav a:hover { color: #f7931e; }
 
     .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px 40px;
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 30px 60px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
+    h2 {
+      text-align: center;
+      color: #1b1f4b;
+      margin-bottom: 40px;
+      font-size: 28px;
+    }
+
     .funcionalidades-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
     }
     .funcao {
-      background: white;
+      background: #fff;
       border-radius: 15px;
       padding: 30px 25px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.12);
@@ -79,6 +86,13 @@
       line-height: 1.4;
     }
 
+    footer {
+      background-color: #0a0f2c;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
     @media (max-width: 768px) {
       header {
         flex-direction: column;
@@ -103,21 +117,21 @@
 </header>
 
 <div class="container">
-  <h2 style="text-align:center; color:#1b1f4b; margin-bottom:30px;">Funcionalidades Inovadoras</h2>
+  <h2><i class="fas fa-cogs"></i> Funcionalidades Inovadoras</h2>
   <div class="funcionalidades-grid">
     <div class="funcao">
       <i class="fas fa-brain"></i>
       <div class="funcao-content">
         <h3>Deteção em Tempo Real com IA</h3>
-        <p>Redes neurais identificam ameaças instantaneamente para prevenir danos.</p>
+        <p>Redes neurais que analisam o comportamento do sistema em tempo real, detetando ameaças antes que causem danos.</p>
       </div>
     </div>
 
     <div class="funcao">
       <i class="fas fa-shield-virus"></i>
       <div class="funcao-content">
-        <h3>Proteção contra Ransomware</h3>
-        <p>Bloqueio de encriptação maliciosa, protegendo os teus ficheiros.</p>
+        <h3>Proteção Contra Ransomware</h3>
+        <p>Interrompe tentativas de encriptação maliciosa, mantendo os teus dados sempre protegidos e acessíveis.</p>
       </div>
     </div>
 
@@ -125,7 +139,7 @@
       <i class="fas fa-user-secret"></i>
       <div class="funcao-content">
         <h3>Privacidade Avançada</h3>
-        <p>Ferramentas para garantir o anonimato e proteção de dados.</p>
+        <p>Ferramentas de anonimato e controlo de permissões que asseguram a tua privacidade digital.</p>
       </div>
     </div>
 
@@ -133,7 +147,7 @@
       <i class="fas fa-sync-alt"></i>
       <div class="funcao-content">
         <h3>Atualizações Inteligentes</h3>
-        <p>Prioriza ameaças emergentes com atualizações automáticas.</p>
+        <p>O NeuraGuard adapta-se constantemente, recebendo atualizações automáticas com foco nas ameaças mais recentes.</p>
       </div>
     </div>
 
@@ -141,7 +155,7 @@
       <i class="fas fa-cloud-upload-alt"></i>
       <div class="funcao-content">
         <h3>Backup Seguro na Cloud</h3>
-        <p>Recuperação rápida com versões protegidas dos teus dados.</p>
+        <p>Recupera ficheiros importantes através de backups encriptados e seguros na nuvem.</p>
       </div>
     </div>
 
@@ -149,11 +163,15 @@
       <i class="fas fa-mobile-alt"></i>
       <div class="funcao-content">
         <h3>Proteção Multi-Plataforma</h3>
-        <p>Segurança em Windows, macOS, Android e iOS.</p>
+        <p>Funciona em Windows, macOS, Android e iOS, garantindo segurança contínua onde quer que estejas.</p>
       </div>
     </div>
   </div>
 </div>
+
+<footer>
+  <p>&copy; 2025 NeuraGuard | Max Oliveira, Carlos Marques, Salvador Carvalho, Beatriz Ferreira</p>
+</footer>
 
 </body>
 </html>
