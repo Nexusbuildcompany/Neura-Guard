@@ -7,27 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f4f6fc;
       color: #222;
       line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
       overflow-x: hidden;
-    }
-
-    body.dark-mode {
-      background-color: #121212;
-      color: #eee;
-    }
-
-    body.dark-mode section {
-      background-color: #1e1e1e;
-    }
-
-    body.dark-mode header, body.dark-mode footer {
-      background-color: #0a0a0a;
     }
 
     header {
@@ -37,43 +23,92 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      position: relative;
+      z-index: 101;
     }
 
-    header img { height: 50px; }
+    header img {
+      height: 50px;
+    }
 
     nav {
       display: flex;
-      align-items: center;
+      gap: 20px;
     }
 
     nav a {
-      color: #fff;
-      margin-left: 20px;
+      color: white;
       text-decoration: none;
       font-weight: 600;
-      transition: all 0.3s ease;
+      transition: color 0.3s, transform 0.3s;
     }
 
-    nav a:hover {
-      color: #f7931e;
-      transform: scale(1.05);
+   nav a:hover {
+      color: #ffffff;
     }
 
+    #btnMenu {
+      background: transparent;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s;
+      display: none;
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 24px;
+      user-select: none;
+      z-index: 110;
+    }
+
+    #btnMenu:hover {
+      background-color: none;
+      color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        height: 100%;
+        width: 250px;
+        background-color: #0a0f2c;
+        flex-direction: column;
+        padding: 70px 20px 20px;
+        gap: 25px;
+        transition: right 0.3s ease;
+        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+        z-index: 100;
+      }
+    }
+    
     .hero {
       background: linear-gradient(to right, #1b1f4b, #343a75);
       color: white;
       text-align: center;
       padding: 100px 20px;
+      margin-bottom: 40px;
     }
 
-    .hero img { max-width: 100px; margin-bottom: 20px; }
+    .hero img {
+      max-width: 100px;
+      margin-bottom: 20px;
+    }
 
-    .hero h1 { font-size: 48px; margin-bottom: 10px; }
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
 
-    .hero p { font-size: 20px; margin-bottom: 30px; }
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
 
     .btn {
       background: linear-gradient(to right, #f7931e, #fbb034);
@@ -83,9 +118,11 @@
       border-radius: 8px;
       font-size: 16px;
       text-decoration: none;
-      transition: all 0.3s ease;
+      font-weight: 700;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+      display: inline-block;
     }
 
     .btn:hover {
@@ -94,13 +131,13 @@
     }
 
     section {
-      padding: 60px 30px;
-      max-width: 1100px;
+      max-width: 1000px;
       margin: auto;
       background: white;
-      margin-bottom: 30px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      margin-bottom: 40px;
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -112,19 +149,18 @@
     }
 
     section h2 {
-      font-size: 28px;
+      font-size: 32px;
       color: #1b1f4b;
       margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    section ul { padding-left: 20px; }
-
-    section ul li { margin-bottom: 10px; }
-
-    .icon-section i {
-      font-size: 32px;
-      color: #f7931e;
-      margin-right: 10px;
+    section p {
+      font-size: 18px;
+      color: #444;
+      line-height: 1.5;
     }
 
     footer {
@@ -132,104 +168,48 @@
       color: white;
       text-align: center;
       padding: 20px;
-    }
-
-    /* Botão modo escuro */
-    .dark-toggle {
-      background: none;
-      border: 2px solid white;
-      color: white;
-      padding: 6px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      margin-left: 20px;
-      transition: all 0.3s ease;
-    }
-
-    .dark-toggle:hover {
-      background-color: #f7931e;
-      color: black;
-      border-color: #f7931e;
-    }
-
-    /* Botão menu hamburguer */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 28px;
-      color: white;
-      cursor: pointer;
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 1500;
-      padding: 5px 10px;
-      border-radius: 6px;
-      user-select: none;
+      font-weight: 600;
     }
 
     /* Mobile */
     @media (max-width: 768px) {
-      header {
-        flex-direction: row; /* para o botão ficar ao lado da logo */
-        align-items: center;
-        padding: 15px 20px 15px 20px;
-      }
-
       nav {
         position: fixed;
         top: 0;
-        right: 0;
-        height: 100vh;
+        right: -250px;
+        height: 100%;
         width: 250px;
         background-color: #0a0f2c;
         flex-direction: column;
-        padding: 70px 20px 20px 20px;
-        gap: 15px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-        z-index: 1400;
+        padding: 70px 20px 20px;
+        gap: 25px;
+        transition: right 0.3s ease;
+        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+        z-index: 100;
       }
 
       nav.show {
-        transform: translateX(0);
+        right: 0;
       }
 
       nav a {
-        margin: 15px 0;
         font-size: 18px;
-        margin-left: 0;
+        margin: 0;
       }
 
-      .dark-toggle {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        z-index: 1600;
-        margin-left: 0;
-      }
-
-      .menu-toggle {
+      #btnMenu {
         display: block;
+      }
+
+      header img {
+        height: 40px;
       }
     }
 
     /* Desktop */
     @media (min-width: 769px) {
-      .menu-toggle {
+      #btnMenu {
         display: none;
-      }
-
-      nav {
-        position: static;
-        height: auto;
-        width: auto;
-        transform: none !important;
-        flex-direction: row;
-        padding: 0;
-        gap: 20px;
       }
     }
   </style>
@@ -238,7 +218,6 @@
 
 <header>
   <img src="logo.png" alt="Logo NeuraGuard" />
-  <button class="menu-toggle" id="btnMenu" aria-label="Abrir menu">&#9776;</button>
   <nav id="navMenu">
     <a href="sobre.html">Sobre</a>
     <a href="funcionalidades.html">Funcionalidades</a>
@@ -246,7 +225,7 @@
     <a href="precos.html">Preços</a>
     <a href="feedback.html">Feedback</a>
   </nav>
-  <button class="dark-toggle" id="toggleDarkMode">Modo escuro</button>
+  <button id="btnMenu" aria-label="Abrir menu">&#9776;</button>
 </header>
 
 <section class="hero">
@@ -272,64 +251,24 @@
 </footer>
 
 <script>
-  // Scroll fade-in animation
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  });
-  document.querySelectorAll('section').forEach(el => observer.observe(el));
-
   const btnMenu = document.getElementById('btnMenu');
   const navMenu = document.getElementById('navMenu');
-  const toggleDarkModeBtn = document.getElementById('toggleDarkMode');
 
-  // Função para ativar/desativar modo escuro e guardar preferência
-  function setDarkMode(isDark) {
-    if (isDark) {
-      document.body.classList.add('dark-mode');
-      localStorage.setItem('modoEscuro', 'true');
-      toggleDarkModeBtn.textContent = 'Modo claro';
-    } else {
-      document.body.classList.remove('dark-mode');
-      localStorage.setItem('modoEscuro', 'false');
-      toggleDarkModeBtn.textContent = 'Modo escuro';
-    }
-  }
-
-  // Inicializa o modo escuro com base no localStorage
-  if (localStorage.getItem('modoEscuro') === 'true') {
-    setDarkMode(true);
-  } else {
-    setDarkMode(false);
-  }
-
-  // Alternar modo escuro ao clicar
-  toggleDarkModeBtn.addEventListener('click', () => {
-    const isDark = document.body.classList.contains('dark-mode');
-    setDarkMode(!isDark);
-  });
-
-  // Alternar menu hamburguer
+  // Menu hamburguer toggle
   btnMenu.addEventListener('click', () => {
-    const isOpen = navMenu.classList.toggle('show');
-    btnMenu.innerHTML = isOpen ? '&times;' : '&#9776;'; // ✕ ou ☰
+    navMenu.classList.toggle('show');
+    const aberto = navMenu.classList.contains('show');
+    btnMenu.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+    btnMenu.textContent = aberto ? '✕' : '☰';
   });
 
-  // Fecha menu ao clicar fora no mobile
-  document.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && e.target !== btnMenu) {
-      navMenu.classList.remove('show');
-      btnMenu.innerHTML = '&#9776;';
-    }
-  });
-
-  // Fecha menu ao clicar numa opção no mobile
+  // Fecha o menu ao clicar num link (mobile)
   navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
+      if(window.innerWidth <= 768) {
         navMenu.classList.remove('show');
-        btnMenu.innerHTML = '&#9776;';
+        btnMenu.textContent = '☰';
+        btnMenu.setAttribute('aria-label', 'Abrir menu');
       }
     });
   });
