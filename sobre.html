@@ -2,182 +2,157 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobre - NeuraGuard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+  <link rel="icon" href="logo.png" type="image/png">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #f4f4f4;
-      color: #222;
-    }
-
-    header {
-      background-color: #0a0f2c;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 20px;
-      position: relative;
-      z-index: 100;
-    }
-
-    header img {
-      height: 40px;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      margin-left: 10px;
-    }
-
-    .container {
-      padding: 20px;
-    }
-
-    footer {
-      background-color: #0a0f2c;
-      color: white;
-      text-align: center;
-      padding: 15px;
-    }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      #btnMenu {
-        display: block;
-        position: fixed;
-        top: 15px;
-        right: 15px;
-        background: transparent;
-        border: none;
-        color: white;
-        font-size: 28px;
-        cursor: pointer;
-        z-index: 200;
-      }
-
-      nav {
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100%;
-        width: 220px;
-        background-color: #0a0f2c;
-        flex-direction: column;
-        padding: 70px 20px 20px 20px;
-        gap: 15px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-        z-index: 150;
-      }
-
-      nav.show {
-        transform: translateX(0);
-      }
-
-      nav a {
-        font-size: 18px;
-        margin-left: 0;
-      }
-    }
-
-    /* Desktop */
-    @media (min-width: 769px) {
-      #btnMenu {
-        display: none;
-      }
-      nav {
-        position: static;
-        height: auto;
-        width: auto;
-        transform: none !important;
-        flex-direction: row;
-        padding: 0;
-        gap: 20px;
-      }
+    body { font-family: 'Inter', sans-serif; }
+    .section-card {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      backdrop-filter: blur(16px);
     }
   </style>
 </head>
-<body>
+<body class="bg-black text-white overflow-x-hidden relative">
 
-<header>
-  <img src="logo.png" alt="Logo NeuraGuard" />
-  <button id="btnMenu" aria-label="Abrir menu">&#9776;</button>
-  <nav id="navMenu">
-    <a href="index.html">Página Principal</a>
-    <a href="funcionalidades.html">Funcionalidades</a>
-    <a href="comparacao.html">Comparação</a>
-    <a href="precos.html">Preços</a>
-    <a href="feedback.html">Feedback</a>
-  </nav>
-</header>
+  <div id="particles-js" class="fixed inset-0 -z-10" aria-hidden="true"></div>
 
-<div class="container">
-  <h1>Sobre o NeuraGuard</h1>
-  <p>O <strong>NeuraGuard</strong> é um antivírus de nova geração, desenvolvido com o objetivo de oferecer segurança digital avançada através de tecnologia baseada em inteligência artificial.</p>
+  <header class="flex justify-between items-center px-6 py-4 bg-black/80 backdrop-blur border-b border-white/10 relative">
+    <a href="index.html" aria-label="Página inicial">
+      <img src="logo.png" alt="Logo NeuraGuard" class="h-10">
+    </a>
+    <nav class="hidden md:flex space-x-6 text-white font-medium" aria-label="Navegação principal">
+      <a href="index.html" class="hover:text-emerald-400">Página Principal</a>
+      <a href="funcionalidades.html" class="hover:text-emerald-400">Funcionalidades</a>
+      <a href="comparacao.html" class="hover:text-emerald-400">Comparação</a>
+      <a href="precos.html" class="hover:text-emerald-400">Preços</a>
+      <a href="feedback.html" class="hover:text-emerald-400">Feedback</a>
+    </nav>
+    <button id="menu-btn" class="md:hidden text-xl" aria-label="Abrir menu">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
 
-  <h2>Missão</h2>
-  <p>Proteger os dados e dispositivos dos utilizadores de forma eficiente, leve e acessível, recorrendo a algoritmos inteligentes de deteção de ameaças em tempo real.</p>
+  <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 z-50 flex flex-col items-center justify-center space-y-6 text-lg opacity-0">
+    <button id="close-menu" class="absolute top-4 right-4 text-2xl" aria-label="Fechar menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <a href="index.html" class="hover:text-emerald-400">Página Principal</a>
+    <a href="funcionalidades.html" class="hover:text-emerald-400">Funcionalidades</a>
+    <a href="comparacao.html" class="hover:text-emerald-400">Comparação</a>
+    <a href="precos.html" class="hover:text-emerald-400">Preços</a>
+    <a href="feedback.html" class="hover:text-emerald-400">Feedback</a>
+  </div>
 
-  <h2>Equipa de Desenvolvimento</h2>
-  <ul>
-    <li><strong>Carlos Marques</strong> – Programador e Designer de Interface</li>
-    <li><strong>Max Oliveira</strong> – Investigador em Cibersegurança</li>
-    <li><strong>Salvador Carvalho</strong> – Responsável pelo Backend</li>
-    <li><strong>Beatriz Ferreira</strong> – Comunicação e Documentação</li>
-  </ul>
+  <main class="max-w-4xl mx-auto px-6 py-16 space-y-10">
+    <section class="section-card">
+      <h1 class="text-3xl font-bold mb-2">Sobre o NeuraGuard</h1>
+<p class="text-white/70 mb-6">Conheça a história, missão e visão da solução de segurança digital que está redefinindo a proteção cibernética com inteligência artificial.</p>
+      <p>O <strong>NeuraGuard</strong> é um antivírus de nova geração, desenvolvido com o objetivo de oferecer segurança digital avançada através de tecnologia baseada em inteligência artificial.</p>
+    </section>
 
-  <h2>Funcionalidades-Chave</h2>
-  <ul>
-    <li>Análise em tempo real de ficheiros e processos</li>
-    <li>Proteção contra phishing e malware</li>
-    <li>Modo silencioso para jogos e apresentações</li>
-    <li>Relatórios semanais automáticos</li>
-  </ul>
+    <section class="section-card">
+      <h2 class="text-2xl font-semibold mb-2">Missão</h2>
+      <p>Proteger os dados e dispositivos dos utilizadores de forma eficiente, leve e acessível, recorrendo a algoritmos inteligentes de detecção de ameaças em tempo real.</p>
+    </section>
 
-  <h2>O Futuro do NeuraGuard</h2>
-  <p>Estamos constantemente a melhorar o nosso software. No futuro, pretendemos integrar uma firewall inteligente, análise comportamental de aplicações e controlo parental avançado.</p>
+    <section class="section-card">
+      <h2 class="text-2xl font-semibold mb-2">Equipa de Desenvolvimento</h2>
+      <div class="flex items-center gap-4">
+  <img src="carlos.jpg" alt="Foto de Carlos Marques" class="w-16 h-16 rounded-full border border-white/20">
+  <div>
+    <p class="font-semibold">Carlos Marques</p>
+    <p class="text-sm text-white/70">Programador e Designer de Interface</p>
+    <p class="text-sm text-white/50 italic">"Apaixonado por criar experiências digitais seguras e acessíveis."</p>
+  </div>
 </div>
+    </section>
 
-<footer>
-  <p>&copy; 2025 NeuraGuard | Max Oliveira, Carlos Marques, Salvador Carvalho, Beatriz Ferreira</p>
-</footer>
+    <section class="section-card">
+  <h2 class="text-2xl font-semibold mb-4">Funcionalidades-Chave</h2>
+  <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-white/80">
+        <li>Análise em tempo real de ficheiros e processos</li>
+        <li>Proteção contra phishing e malware</li>
+        <li>Modo silencioso para jogos e apresentações</li>
+        <li>Relatórios semanais automáticos</li>
+      </ul>
+    </section>
 
-<script>
-  const btnMenu = document.getElementById('btnMenu');
-  const navMenu = document.getElementById('navMenu');
+    <section class="section-card">
+  <h2 class="text-2xl font-semibold mb-4">O Futuro do NeuraGuard</h2>
+  <div class="space-y-3">
+    <div class="flex items-start gap-3">
+      <i class="fas fa-shield-alt text-emerald-400 mt-1"></i>
+      <p>Firewall inteligente com regras adaptativas baseadas em comportamento de rede.</p>
+    </div>
+    <div class="flex items-start gap-3">
+      <i class="fas fa-brain text-emerald-400 mt-1"></i>
+      <p>Análise comportamental avançada para prevenir ameaças zero-day.</p>
+    </div>
+    <div class="flex items-start gap-3">
+      <i class="fas fa-child text-emerald-400 mt-1"></i>
+      <p>Controlo parental com insights e alertas inteligentes para os pais.</p>
+    </div>
+  </div>
+      <p>Estamos constantemente a melhorar o nosso software. No futuro, pretendemos integrar uma firewall inteligente, análise comportamental de aplicações e controlo parental avançado.</p>
+    </section>
+  </main>
 
-  // Menu hamburguer toggle
-  btnMenu.addEventListener('click', () => {
-    navMenu.classList.toggle('show');
-    const aberto = navMenu.classList.contains('show');
-    btnMenu.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
-    btnMenu.textContent = aberto ? '✕' : '☰';
-  });
+  <footer class="bg-black/90 text-center text-white/60 py-6 text-sm border-t border-white/10">
+    &copy; 2025 NeuraGuard | Carlos Marques
+  </footer>
 
-  // Fecha o menu ao clicar num link (mobile)
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      if(window.innerWidth <= 768) {
-        navMenu.classList.remove('show');
-        btnMenu.textContent = '☰';
-        btnMenu.setAttribute('aria-label', 'Abrir menu');
-      }
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      gsap.fromTo(mobileMenu, { autoAlpha: 0 }, { duration: 0.4, autoAlpha: 1 });
     });
-  });
-</script>
+
+    closeMenu.addEventListener('click', () => {
+      gsap.to(mobileMenu, {
+        duration: 0.3,
+        autoAlpha: 0,
+        onComplete: () => mobileMenu.classList.add('hidden')
+      });
+    });
+
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60, density: { enable: true, value_area: 800 } },
+        color: { value: "#10b981" },
+        shape: { type: "circle" },
+        opacity: { value: 0.1, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#10b981", opacity: 0.1, width: 1 },
+        move: { enable: true, speed: 1, random: true, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 0.3 } },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 
 </body>
 </html>
