@@ -45,16 +45,7 @@
       color: #f7931e;
     }
 
-    .menu-toggle {
-      display: none;
-      font-size: 24px;
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-    }
-
-    /* CSS do #btnMenu que pediste */
+    /* CSS do #btnMenu */
     #btnMenu {
       background: transparent;
       border: none;
@@ -72,9 +63,8 @@
       user-select: none;
       z-index: 110;
     }
-
     #btnMenu:hover {
-      background-color: none;
+      background-color: transparent;
       color: #ffffff;
     }
 
@@ -139,10 +129,6 @@
       nav.show {
         display: flex;
       }
-      .menu-toggle {
-        display: block;
-      }
-
       /* Mostrar o btnMenu em mobile */
       #btnMenu {
         display: block;
@@ -154,11 +140,8 @@
 
 <header>
   <img src="logo.png" alt="Logo NeuraGuard" />
-  <button id="btnMenu" aria-label="Botão Menu">
-    <i class="fas fa-bars"></i>
-  </button>
-  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
-    <i class="fas fa-bars"></i>
+  <button id="btnMenu" aria-label="Abrir menu">
+    ☰
   </button>
   <nav id="navMenu" role="navigation" aria-label="Menu principal">
     <a href="index.html">Página Principal</a>
@@ -189,7 +172,6 @@
   const btnMenu = document.getElementById('btnMenu');
   const navMenu = document.getElementById('navMenu');
 
-  // Menu hamburguer toggle
   btnMenu.addEventListener('click', () => {
     navMenu.classList.toggle('show');
     const aberto = navMenu.classList.contains('show');
@@ -197,7 +179,6 @@
     btnMenu.textContent = aberto ? '✕' : '☰';
   });
 
-  // Fecha o menu ao clicar num link (mobile)
   navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       if(window.innerWidth <= 768) {
