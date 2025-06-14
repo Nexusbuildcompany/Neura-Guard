@@ -44,8 +44,7 @@
     }
 
     nav a:hover {
-      color: #f7931e; /* cor laranja no hover */
-      transform: scale(1.05);
+      color: #ffffff;
     }
 
     #btnMenu {
@@ -67,13 +66,8 @@
     }
 
     #btnMenu:hover {
-      background-color: transparent;
-      color: #f7931e; /* cor laranja no hover */
-    }
-
-    #btnMenu:focus {
-      outline: 2px solid #f7931e;
-      outline-offset: 2px;
+      background-color: none;
+      color: #ffffff;
     }
 
     @media (max-width: 768px) {
@@ -161,14 +155,10 @@
       border-radius: 16px;
       box-shadow: 0 6px 16px rgba(0,0,0,0.08);
       margin-bottom: 40px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    section.visible {
+      /* Texto aparece logo: */
       opacity: 1;
       transform: translateY(0);
+      transition: none;
     }
 
     section h2 {
