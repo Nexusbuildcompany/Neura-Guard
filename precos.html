@@ -125,6 +125,19 @@
       ease: "power4.out"
     });
 
+    // Mobile menu animation
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      gsap.to(mobileMenu, { duration: 0.4, autoAlpha: 1, display: 'flex' });
+    });
+
+    closeMenu.addEventListener('click', () => {
+      gsap.to(mobileMenu, { duration: 0.3, autoAlpha: 0, onComplete: () => mobileMenu.classList.add('hidden') });
+    });
+
     const langBtn = document.getElementById('lang-switch');
     const dropdown = document.getElementById('lang-dropdown');
     const currentLang = document.getElementById('current-lang');
