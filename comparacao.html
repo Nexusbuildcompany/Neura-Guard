@@ -2,313 +2,139 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Comparação - NeuraGuard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <link rel="icon" href="logo.png" type="image/png">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f4f6fc;
-      color: #222;
-      transition: background-color 0.3s, color 0.3s;
+    body { font-family: 'Inter', sans-serif; }
+    .table-container {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      backdrop-filter: blur(16px);
     }
-    header {
-      background-color: #0a0f2c;
-      color: white;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      flex-wrap: wrap;
-      position: relative;
-    }
-    header img {
-      height: 50px;
-    }
-    nav {
-      display: flex;
-      gap: 20px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #f7931e;
-    }
-
-    #darkModeToggle {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 600;
-      margin-left: 20px;
-      white-space: nowrap;
-      transition: color 0.3s;
-    }
-    #darkModeToggle:hover {
-      color: #f7931e;
-    }
-
-    #menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 28px;
-      color: white;
-      cursor: pointer;
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 1100;
-      transition: color 0.3s;
-    }
-    #menu-toggle:hover {
-      color: #f7931e;
-    }
-
-    /* Mobile styles */
-    @media (max-width: 768px) {
-      header {
-        padding: 15px 20px;
-      }
-      #menu-toggle {
-        display: block;
-      }
-      nav {
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 250px;
-        background-color: #0a0f2c;
-        flex-direction: column;
-        padding: 80px 20px 20px 20px;
-        gap: 20px;
-        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
-        transform: translateX(100%);
-        opacity: 0;
-        pointer-events: none;
-      }
-      nav.active {
-        transform: translateX(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-      nav a {
-        font-size: 18px;
-      }
-      #darkModeToggle {
-        margin-left: 0;
-        margin-top: 10px;
-      }
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px 40px;
-    }
-    h1 {
-      color: #1b1f4b;
-      margin-bottom: 10px;
-      text-align: center;
-      font-size: 32px;
-    }
-    p.subtitulo {
-      text-align: center;
-      margin-bottom: 40px;
-      color: #555;
-      font-size: 18px;
-    }
-
-    .tabela-scroll {
-      overflow-x: auto;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 900px;
-      background-color: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-      transition: background-color 0.3s, color 0.3s;
-    }
-    th, td {
-      padding: 14px 20px;
-      border: 1px solid #e0e0e0;
-      text-align: center;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    th {
-      background-color: #1b1f4b;
-      color: white;
-      font-size: 16px;
-    }
-    tr:nth-child(even) {
-      background-color: #f9f9ff;
-    }
-    td:first-child {
-      font-weight: 600;
-      text-align: left;
-      background-color: #eef1f9;
-      color: #1b1f4b;
-    }
-
-    /* Dark mode */
-    body.dark-mode {
-      background-color: #121621;
-      color: #ddd;
-    }
-    body.dark-mode header {
-      background-color: #181f3d;
-      color: #ddd;
-    }
-    body.dark-mode nav a {
-      color: #ddd;
-    }
-    body.dark-mode nav a:hover {
-      color: #f7931e;
-    }
-    body.dark-mode table {
-      background-color: #1e2437;
-      color: #ddd;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.7);
-    }
-    body.dark-mode th {
-      background-color: #121921;
-      color: #f7931e;
-    }
-    body.dark-mode tr:nth-child(even) {
-      background-color: #2a3044;
-    }
-    body.dark-mode td:first-child {
-      background-color: #242a44;
-      color: #f7931e;
-    }
+    th, td { transition: background-color 0.3s ease; }
+    td:nth-child(2) { background-color: rgba(16, 185, 129, 0.15); font-weight: bold; }
   </style>
 </head>
-<body>
+<body class="bg-black text-white overflow-x-hidden relative">
 
-<header>
-  <img src="logo.png" alt="Logo NeuraGuard" />
-  <button id="menu-toggle" aria-label="Abrir menu">☰</button>
-  <nav>
-    <a href="index.html">Página Principal</a>
-    <a href="sobre.html">Sobre</a>
-    <a href="funcionalidades.html">Funcionalidades</a>
-    <a href="precos.html">Preços</a>
-    <a href="feedback.html">Feedback</a>
-  </nav>
-  <button id="darkModeToggle" title="Alternar Modo Escuro">
-    <i class="fas fa-moon"></i> Modo Escuro
-  </button>
-</header>
+  <div id="particles-js" class="fixed inset-0 -z-10" aria-hidden="true"></div>
 
-<div class="container">
-  <h1><i class="fas fa-balance-scale-left"></i> Comparação com Concorrentes</h1>
-  <p class="subtitulo">Descobre como o NeuraGuard se destaca entre os antivírus mais populares.</p>
+  <header class="flex justify-between items-center px-6 py-4 bg-black/80 backdrop-blur border-b border-white/10 relative">
+    <a href="index.html" aria-label="Página inicial">
+      <img src="logo.png" alt="Logo NeuraGuard" class="h-10">
+    </a>
+    <nav class="hidden md:flex space-x-6 text-white font-medium" aria-label="Navegação principal">
+      <a href="index.html" class="hover:text-emerald-400">Página Principal</a>
+      <a href="sobre.html" class="hover:text-emerald-400">Sobre</a>
+      <a href="funcionalidades.html" class="hover:text-emerald-400">Funcionalidades</a>
+      <a href="precos.html" class="hover:text-emerald-400">Preços</a>
+      <a href="feedback.html" class="hover:text-emerald-400">Feedback</a>
+    </nav>
+    <button id="menu-btn" class="md:hidden text-xl" aria-label="Abrir menu">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
 
-  <div class="tabela-scroll">
-    <table>
-      <thead>
-        <tr>
-          <th>Funcionalidade</th>
-          <th>NeuraGuard</th>
-          <th>Avast</th>
-          <th>Norton</th>
-          <th>Bitdefender</th>
-          <th>Kaspersky</th>
-          <th>Windows Defender</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Deteção com Inteligência Artificial</td><td>✔️</td><td>❌</td><td>❌</td><td>✔️</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Protecção contra Ransomware</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
-        <tr><td>Análise de comportamento em tempo real</td><td>✔️</td><td>❌</td><td>❌</td><td>✔️</td><td>✔️</td><td>❌</td></tr>
-        <tr><td>Actualizações automáticas inteligentes</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
-        <tr><td>Impacto no desempenho do sistema</td><td>Mínimo</td><td>Moderado</td><td>Elevado</td><td>Moderado</td><td>Moderado</td><td>Baixo</td></tr>
-        <tr><td>Backup na Cloud</td><td>✔️</td><td>❌</td><td>✔️</td><td>✔️</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Protecção Multi-Plataforma</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>Parcial</td></tr>
-        <tr><td>Privacidade e anonimato online</td><td>✔️</td><td>❌</td><td>✔️</td><td>❌</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Interface amigável</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
-        <tr><td>Suporte técnico 24/7</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>Limitado</td></tr>
-        <tr><td>Actualizações baseadas em Machine Learning</td><td>✔️</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
-      </tbody>
-    </table>
+  <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 z-50 flex flex-col items-center justify-center space-y-6 text-lg opacity-0">
+    <button id="close-menu" class="absolute top-4 right-4 text-2xl" aria-label="Fechar menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <a href="index.html" class="hover:text-emerald-400">Página Principal</a>
+    <a href="sobre.html" class="hover:text-emerald-400">Sobre</a>
+    <a href="funcionalidades.html" class="hover:text-emerald-400">Funcionalidades</a>
+    <a href="precos.html" class="hover:text-emerald-400">Preços</a>
+    <a href="feedback.html" class="hover:text-emerald-400">Feedback</a>
   </div>
-</div>
 
-<script>
-  const toggleButton = document.getElementById('darkModeToggle');
-  const menuToggle = document.getElementById('menu-toggle');
-  const nav = document.querySelector('nav');
+  <main class="max-w-7xl mx-auto px-6 py-16">
+    <h1 class="text-4xl font-bold text-center mb-4">
+      <i class="fas fa-balance-scale-left text-emerald-400"></i> Comparação com Concorrentes
+    </h1>
+    <p class="text-white/70 text-center mb-10 max-w-2xl mx-auto">Descobre como o NeuraGuard se destaca entre os antivírus mais populares.</p>
 
-  // Função para guardar o modo escuro no localStorage
-  function setDarkMode(enabled) {
-    if (enabled) {
-      document.body.classList.add('dark-mode');
-      toggleButton.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-      localStorage.setItem('darkMode', 'enabled');
-    } else {
-      document.body.classList.remove('dark-mode');
-      toggleButton.innerHTML = '<i class="fas fa-moon"></i> Modo Escuro';
-      localStorage.setItem('darkMode', 'disabled');
-    }
-  }
+    <div class="table-container overflow-x-auto">
+      <table class="w-full border-collapse text-sm md:text-base">
+        <thead class="bg-emerald-600 text-white">
+          <tr>
+            <th class="p-3">Funcionalidade</th>
+            <th class="p-3">NeuraGuard</th>
+            <th class="p-3">Avast</th>
+            <th class="p-3">Norton</th>
+            <th class="p-3">Bitdefender</th>
+            <th class="p-3">Kaspersky</th>
+            <th class="p-3">Windows Defender</th>
+          </tr>
+        </thead>
+        <tbody class="bg-black/40 text-white/90">
+          <tr><td class="p-3">Deteção com Inteligência Artificial</td><td>✔️</td><td>❌</td><td>❌</td><td>✔️</td><td>❌</td><td>❌</td></tr>
+          <tr><td class="p-3">Protecção contra Ransomware</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+          <tr><td class="p-3">Análise de comportamento em tempo real</td><td>✔️</td><td>❌</td><td>❌</td><td>✔️</td><td>✔️</td><td>❌</td></tr>
+          <tr><td class="p-3">Actualizações automáticas inteligentes</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+          <tr><td class="p-3">Impacto no desempenho do sistema</td><td>Mínimo</td><td>Moderado</td><td>Elevado</td><td>Moderado</td><td>Moderado</td><td>Baixo</td></tr>
+          <tr><td class="p-3">Backup na Cloud</td><td>✔️</td><td>❌</td><td>✔️</td><td>✔️</td><td>❌</td><td>❌</td></tr>
+          <tr><td class="p-3">Protecção Multi-Plataforma</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>Parcial</td></tr>
+          <tr><td class="p-3">Privacidade e anonimato online</td><td>✔️</td><td>❌</td><td>✔️</td><td>❌</td><td>❌</td><td>❌</td></tr>
+          <tr><td class="p-3">Interface amigável</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
+          <tr><td class="p-3">Suporte técnico 24/7</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>✔️</td><td>Limitado</td></tr>
+          <tr><td class="p-3">Actualizações baseadas em Machine Learning</td><td>✔️</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
 
-  // Verifica se existe preferência guardada no localStorage
-  if (localStorage.getItem('darkMode') === 'enabled') {
-    setDarkMode(true);
-  }
+  <footer class="bg-black/90 text-center text-white/60 py-6 text-sm border-t border-white/10">
+    &copy; 2025 NeuraGuard | Carlos Marques
+  </footer>
 
-  toggleButton.addEventListener('click', () => {
-    const isDark = document.body.classList.contains('dark-mode');
-    setDarkMode(!isDark);
-  });
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-  // Alternar menu no mobile e mudar ícone
-  menuToggle.addEventListener('click', () => {
-    const isActive = nav.classList.toggle('active');
-    menuToggle.textContent = isActive ? '✕' : '☰';
-  });
-
-  // Fechar menu se clicares fora no mobile
-  document.addEventListener('click', (e) => {
-    const target = e.target;
-    const isClickInsideNav = nav.contains(target);
-    const isClickOnToggle = menuToggle.contains(target);
-
-    if (!isClickInsideNav && !isClickOnToggle && nav.classList.contains('active')) {
-      nav.classList.remove('active');
-      menuToggle.textContent = '☰';
-    }
-  });
-
-  // Fechar menu ao clicar num link no mobile
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (nav.classList.contains('active')) {
-        nav.classList.remove('active');
-        menuToggle.textContent = '☰';
-      }
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      gsap.fromTo(mobileMenu, { autoAlpha: 0 }, { duration: 0.4, autoAlpha: 1 });
     });
-  });
-</script>
+
+    closeMenu.addEventListener('click', () => {
+      gsap.to(mobileMenu, {
+        duration: 0.3,
+        autoAlpha: 0,
+        onComplete: () => mobileMenu.classList.add('hidden')
+      });
+    });
+
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60, density: { enable: true, value_area: 800 } },
+        color: { value: "#10b981" },
+        shape: { type: "circle" },
+        opacity: { value: 0.1, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#10b981", opacity: 0.1, width: 1 },
+        move: { enable: true, speed: 1, random: true, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 0.3 } },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 
 </body>
 </html>

@@ -15,8 +15,18 @@
       font-family: 'Inter', sans-serif;
     }
     .feature-card {
-      @apply relative bg-black/30 border border-white/10 rounded-xl p-6 backdrop-blur-lg transition-all duration-300 hover:scale-105 hover:border-emerald-400;
-    }
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  transition: all 0.3s ease;
+}
+.feature-card:hover {
+  transform: scale(1.05);
+  border-color: #34d399; /* emerald-400 */
+}
     @media (max-width: 768px) {
       #mobile-menu { display: block; }
       #desktop-menu { display: none; }

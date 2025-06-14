@@ -2,206 +2,124 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feedback - NeuraGuard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+  <link rel="icon" href="logo.png" type="image/png">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f4f6fc;
-      color: #222;
-      line-height: 1.6;
-    }
-
-    header {
-      background-color: #0a0f2c;
-      color: white;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 101;
-    }
-
-    header img {
-      height: 50px;
-    }
-
-    nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #f7931e;
-    }
-
-    #btnMenu {
-      background: transparent;
-      border: none;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s, color 0.3s;
-      display: none;
-      position: absolute;
-      top: 20px;
-      right: 40px;
-      font-size: 24px;
-      user-select: none;
-      z-index: 110;
-    }
-
-    #btnMenu:hover {
-      background-color: transparent;
-      color: #ffffff;
-    }
-
-    /* Menu lateral no mobile */
-    @media (max-width: 768px) {
-      nav {
-        position: fixed;
-        top: 0;
-        right: -250px;
-        height: 100%;
-        width: 250px;
-        background-color: #0a0f2c;
-        flex-direction: column;
-        padding: 70px 20px 20px;
-        gap: 25px;
-        transition: right 0.3s ease;
-        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
-        z-index: 100;
-      }
-
-      nav.show {
-        right: 0;
-      }
-
-      #btnMenu {
-        display: block;
-      }
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    h2 {
-      text-align: center;
-      color: #1b1f4b;
-      margin-bottom: 20px;
-      transition: color 0.3s;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    label {
-      margin-top: 15px;
-      font-weight: bold;
-      color: #1b1f4b;
-      transition: color 0.3s;
-    }
-
-    input, textarea {
-      padding: 12px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    }
-
-    button[type="submit"] {
-      background-color: #f7931e;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 16px;
-      margin-top: 20px;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: background-color 0.3s;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #d86d00;
+    body { font-family: 'Inter', sans-serif; }
+    .feedback-card {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      backdrop-filter: blur(16px);
     }
   </style>
 </head>
-<body>
+<body class="bg-black text-white overflow-x-hidden relative">
 
-<header>
-  <img src="logo.png" alt="Logo NeuraGuard" />
-  <nav id="navMenu" role="navigation" aria-label="Menu principal">
-    <a href="index.html">Página Principal</a>
-    <a href="sobre.html">Sobre</a>
-    <a href="funcionalidades.html">Funcionalidades</a>
-    <a href="comparacao.html">Comparação</a>
-    <a href="precos.html">Preços</a>
-  </nav>
-  <button id="btnMenu" aria-label="Abrir menu">&#9776;</button>
-</header>
+  <div id="particles-js" class="fixed inset-0 -z-10" aria-hidden="true"></div>
 
-<div class="container">
-  <h2>Envia-nos o teu feedback</h2>
-  <form action="https://formspree.io/f/xovwdbko" method="POST">
-    <label for="nome">Nome:</label>
-    <input type="text" name="nome" id="nome" required />
+  <header class="flex justify-between items-center px-6 py-4 bg-black/80 backdrop-blur border-b border-white/10 relative">
+    <a href="index.html" aria-label="Página inicial">
+      <img src="logo.png" alt="Logo NeuraGuard" class="h-10">
+    </a>
+    <nav class="hidden md:flex space-x-6 text-white font-medium" aria-label="Navegação principal">
+      <a href="index.html" class="hover:text-emerald-400">Página Principal</a>
+      <a href="sobre.html" class="hover:text-emerald-400">Sobre</a>
+      <a href="funcionalidades.html" class="hover:text-emerald-400">Funcionalidades</a>
+      <a href="comparacao.html" class="hover:text-emerald-400">Comparação</a>
+      <a href="precos.html" class="hover:text-emerald-400">Preços</a>
+    </nav>
+    <button id="menu-btn" class="md:hidden text-xl" aria-label="Abrir menu">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" required />
+  <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 z-50 flex flex-col items-center justify-center space-y-6 text-lg opacity-0">
+    <button id="close-menu" class="absolute top-4 right-4 text-2xl" aria-label="Fechar menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <a href="index.html" class="hover:text-emerald-400">Página Principal</a>
+    <a href="sobre.html" class="hover:text-emerald-400">Sobre</a>
+    <a href="funcionalidades.html" class="hover:text-emerald-400">Funcionalidades</a>
+    <a href="comparacao.html" class="hover:text-emerald-400">Comparação</a>
+    <a href="precos.html" class="hover:text-emerald-400">Preços</a>
+  </div>
 
-    <label for="mensagem">Mensagem:</label>
-    <textarea name="mensagem" id="mensagem" rows="6" required></textarea>
+  <main class="max-w-xl mx-auto px-6 py-16">
+    <div class="feedback-card">
+      <h2 class="text-3xl font-bold text-center mb-6">Envia-nos o teu feedback</h2>
+      <form action="https://formspree.io/f/xovwdbko" method="POST" class="space-y-4">
+        <div>
+          <label for="nome" class="block font-semibold mb-1">Nome</label>
+          <input type="text" id="nome" name="nome" required class="w-full rounded-md p-2 bg-white text-black">
+        </div>
+        <div>
+          <label for="email" class="block font-semibold mb-1">Email</label>
+          <input type="email" id="email" name="email" required class="w-full rounded-md p-2 bg-white text-black">
+        </div>
+        <div>
+          <label for="mensagem" class="block font-semibold mb-1">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="5" required class="w-full rounded-md p-2 bg-white text-black"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 rounded-md transition">Enviar</button>
+      </form>
+    </div>
+  </main>
 
-    <button type="submit">Enviar</button>
-  </form>
-</div>
+  <footer class="bg-black/90 text-center text-white/60 py-6 text-sm border-t border-white/10">
+    &copy; 2025 NeuraGuard
+  </footer>
 
-<script>
-  const btnMenu = document.getElementById('btnMenu');
-  const navMenu = document.getElementById('navMenu');
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-  btnMenu.addEventListener('click', () => {
-    navMenu.classList.toggle('show');
-    const aberto = navMenu.classList.contains('show');
-    btnMenu.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
-    btnMenu.textContent = aberto ? '✕' : '☰';
-  });
-
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        navMenu.classList.remove('show');
-        btnMenu.textContent = '☰';
-        btnMenu.setAttribute('aria-label', 'Abrir menu');
-      }
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      gsap.fromTo(mobileMenu, { autoAlpha: 0 }, { duration: 0.4, autoAlpha: 1 });
     });
-  });
-</script>
+
+    closeMenu.addEventListener('click', () => {
+      gsap.to(mobileMenu, {
+        duration: 0.3,
+        autoAlpha: 0,
+        onComplete: () => mobileMenu.classList.add('hidden')
+      });
+    });
+
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60, density: { enable: true, value_area: 800 } },
+        color: { value: "#10b981" },
+        shape: { type: "circle" },
+        opacity: { value: 0.1, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#10b981", opacity: 0.1, width: 1 },
+        move: { enable: true, speed: 1, random: true, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 0.3 } },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 
 </body>
 </html>
