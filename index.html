@@ -2,248 +2,155 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NeuraGuard - Sempre a protegê-lo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+  <link rel="icon" href="logo.png" type="image/png">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f4f6fc;
-      color: #222;
-      line-height: 1.6;
-      overflow-x: hidden;
     }
-
-    header {
-      background-color: #0a0f2c;
-      color: white;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 101;
+    .feature-card {
+      @apply relative bg-black/30 border border-white/10 rounded-xl p-6 backdrop-blur-lg transition-all duration-300 hover:scale-105 hover:border-emerald-400;
     }
-
-    header img {
-      height: 50px;
-    }
-
-    nav {
-      display: flex;
-      gap: 20px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    nav a:hover {
-      color: #ffffff;
-    }
-
-    #btnMenu {
-      background: transparent;
-      border: none;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s, color 0.3s;
-      display: none;
-      position: absolute;
-      top: 20px;
-      right: 40px;
-      font-size: 24px;
-      user-select: none;
-      z-index: 110;
-    }
-
-    #btnMenu:hover {
-      background-color: none;
-      color: #ffffff;
-    }
-
     @media (max-width: 768px) {
-      nav {
-        position: fixed;
-        top: 0;
-        right: -250px;
-        height: 100%;
-        width: 250px;
-        background-color: #0a0f2c;
-        flex-direction: column;
-        padding: 70px 20px 20px;
-        gap: 25px;
-        transition: right 0.3s ease;
-        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
-        z-index: 100;
-      }
-
-      nav.show {
-        right: 0;
-      }
-
-      nav a {
-        font-size: 18px;
-        margin: 0;
-      }
-
-      #btnMenu {
-        display: block;
-      }
-
-      header img {
-        height: 40px;
-      }
-    }
-
-    .hero {
-      background: linear-gradient(to right, #1b1f4b, #343a75);
-      color: white;
-      text-align: center;
-      padding: 100px 20px;
-      margin-bottom: 40px;
-    }
-
-    .hero img {
-      max-width: 100px;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 20px;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      background: linear-gradient(to right, #f7931e, #fbb034);
-      color: white;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      text-decoration: none;
-      font-weight: 700;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.3s;
-      display: inline-block;
-    }
-
-    .btn:hover {
-      background: linear-gradient(to right, #e68200, #f6a400);
-      transform: scale(1.05);
-    }
-
-    section {
-      max-width: 1000px;
-      margin: auto;
-      background: white;
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-      margin-bottom: 40px;
-      /* Texto aparece logo: */
-      opacity: 1;
-      transform: translateY(0);
-      transition: none;
-    }
-
-    section h2 {
-      font-size: 32px;
-      color: #1b1f4b;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    section p {
-      font-size: 18px;
-      color: #444;
-      line-height: 1.5;
-    }
-
-    footer {
-      background-color: #0a0f2c;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      font-weight: 600;
+      #mobile-menu { display: block; }
+      #desktop-menu { display: none; }
     }
   </style>
 </head>
-<body>
+<body class="bg-black text-white overflow-x-hidden relative">
 
-<header>
-  <img src="logo.png" alt="Logo NeuraGuard" />
-  <nav id="navMenu">
-    <a href="sobre.html">Sobre</a>
-    <a href="funcionalidades.html">Funcionalidades</a>
-    <a href="comparacao.html">Comparação</a>
-    <a href="precos.html">Preços</a>
-    <a href="feedback.html">Feedback</a>
-  </nav>
-  <button id="btnMenu" aria-label="Abrir menu">&#9776;</button>
-</header>
+  <div id="particles-js" class="fixed inset-0 -z-10" aria-hidden="true"></div>
 
-<section class="hero">
-  <img src="logo.png" alt="Logo NeuraGuard" />
-  <h1>Proteção Inteligente, Segurança Garantida</h1>
-  <p>Descobre o antivírus com inteligência artificial que aprende e evolui para te proteger — sempre.</p>
-  <a href="#publico" class="btn"><i class="fas fa-shield-alt"></i> Explorar Funcionalidades</a>
-  <p style="margin-top: 20px; font-style: italic; opacity: 0.8;">A próxima geração de segurança digital começa aqui.</p>
-</section>
+  <header class="flex justify-between items-center px-6 py-4 bg-black/80 backdrop-blur border-b border-white/10 relative">
+    <a href="index.html" aria-label="Página inicial">
+      <img src="logo.png" alt="Logo NeuraGuard" class="h-10">
+    </a>
+    <div class="absolute left-1/2 transform -translate-x-1/2">
+      <div class="relative">
+        <button id="lang-switch" aria-haspopup="true" aria-expanded="false" class="px-3 py-1 bg-black/30 border border-white/10 rounded text-sm text-white hover:bg-white/10 flex items-center gap-2">
+          <i class="fas fa-globe"></i> <span id="current-lang">Português</span>
+        </button>
+        <div id="lang-dropdown" class="hidden absolute mt-2 w-32 bg-black border border-white/10 rounded shadow-lg z-50">
+          <button data-lang="pt" class="block w-full text-left px-4 py-2 hover:bg-white/10">Português</button>
+          <button data-lang="en" class="block w-full text-left px-4 py-2 hover:bg-white/10">English</button>
+          <button data-lang="es" class="block w-full text-left px-4 py-2 hover:bg-white/10">Español</button>
+        </div>
+      </div>
+    </div>
+    <nav id="desktop-menu" class="hidden md:flex space-x-6 text-white font-medium" aria-label="Navegação principal">
+      <a href="sobre.html" class="hover:text-emerald-400" data-lang-pt="Sobre" data-lang-en="About" data-lang-es="Sobre">Sobre</a>
+      <a href="funcionalidades.html" class="hover:text-emerald-400" data-lang-pt="Funcionalidades" data-lang-en="Features" data-lang-es="Funcionalidades">Funcionalidades</a>
+      <a href="comparacao.html" class="hover:text-emerald-400" data-lang-pt="Comparação" data-lang-en="Comparison" data-lang-es="Comparación">Comparação</a>
+      <a href="precos.html" class="hover:text-emerald-400" data-lang-pt="Preços" data-lang-en="Pricing" data-lang-es="Precios">Preços</a>
+      <a href="feedback.html" class="hover:text-emerald-400" data-lang-pt="Feedback" data-lang-en="Feedback" data-lang-es="Comentarios">Feedback</a>
+    </nav>
+    <button id="menu-btn" class="md:hidden text-xl" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
+  </header>
 
-<section id="publico">
-  <h2><i class="fas fa-users"></i> Público-Alvo</h2>
-  <p>Usuários individuais, pequenas empresas e instituições que valorizam segurança com tecnologia de ponta e simplicidade de uso.</p>
-</section>
+  <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 z-50 flex flex-col items-center justify-center space-y-6 text-lg opacity-0">
+    <button id="close-menu" class="absolute top-4 right-4 text-2xl" aria-label="Fechar menu"><i class="fas fa-times"></i></button>
+    <a href="sobre.html" class="hover:text-emerald-400" data-lang-pt="Sobre" data-lang-en="About" data-lang-es="Sobre">Sobre</a>
+    <a href="funcionalidades.html" class="hover:text-emerald-400" data-lang-pt="Funcionalidades" data-lang-en="Features" data-lang-es="Funcionalidades">Funcionalidades</a>
+    <a href="comparacao.html" class="hover:text-emerald-400" data-lang-pt="Comparação" data-lang-en="Comparison" data-lang-es="Comparación">Comparação</a>
+    <a href="precos.html" class="hover:text-emerald-400" data-lang-pt="Preços" data-lang-en="Pricing" data-lang-es="Precios">Preços</a>
+    <a href="feedback.html" class="hover:text-emerald-400" data-lang-pt="Feedback" data-lang-en="Feedback" data-lang-es="Comentarios">Feedback</a>
+  </div>
 
-<section id="ia">
-  <h2><i class="fas fa-brain"></i> Recursos com Inteligência Artificial</h2>
-  <p>Com redes neurais e análise de comportamento, o NeuraGuard aprende continuamente para proteger contra novas ameaças cibernéticas.</p>
-</section>
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative z-10">
+    <img src="logo.png" alt="Logo NeuraGuard" class="w-24 mb-6">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4" data-lang-pt="Proteção Inteligente, Segurança Garantida" data-lang-en="Smart Protection, Guaranteed Security" data-lang-es="Protección Inteligente, Seguridad Garantizada">Proteção Inteligente, Segurança Garantida</h1>
+    <p class="text-white/70 max-w-xl mb-6" data-lang-pt="Descobre o antivírus com inteligência artificial que aprende e evolui para te proteger — sempre." data-lang-en="Discover the AI-powered antivirus that learns and evolves to protect you—always." data-lang-es="Descubre el antivirus con IA que aprende y evoluciona para protegerte—siempre.">Descobre o antivírus com inteligência artificial que aprende e evolui para te proteger — sempre.</p>
+    <a href="#publico" class="inline-flex items-center gap-2 bg-emerald-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-emerald-600 transition-all">
+      <i class="fas fa-shield-alt"></i> <span data-lang-pt="Explorar Funcionalidades" data-lang-en="Explore Features" data-lang-es="Explorar Funcionalidades">Explorar Funcionalidades</span>
+    </a>
+    <p class="mt-6 italic text-white/50" data-lang-pt="A próxima geração de segurança digital começa aqui." data-lang-en="The next generation of digital security starts here." data-lang-es="La próxima generación de seguridad digital comienza aquí.">A próxima geração de segurança digital começa aqui.</p>
+  </section>
 
-<footer>
-  <p>&copy; 2025 NeuraGuard | Max Oliveira, Carlos Marques, Salvador Carvalho, Beatriz Ferreira</p>
-</footer>
+  <section id="publico" class="max-w-5xl mx-auto py-16 px-6">
+    <div class="feature-card">
+      <h2 class="text-2xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-users text-emerald-400"></i> <span data-lang-pt="Público-Alvo" data-lang-en="Target Audience" data-lang-es="Público Objetivo">Público-Alvo</span></h2>
+      <p class="text-white/70" data-lang-pt="Usuários individuais, pequenas empresas e instituições que valorizam segurança com tecnologia de ponta e simplicidade de uso." data-lang-en="Individual users, small businesses, and institutions that value top-tier security with ease of use." data-lang-es="Usuarios individuales, pequeñas empresas e instituciones que valoran la seguridad con tecnología avanzada y facilidad de uso.">Usuários individuais, pequenas empresas e instituições que valorizam segurança com tecnologia de ponta e simplicidade de uso.</p>
+    </div>
+  </section>
 
-<script>
-  const btnMenu = document.getElementById('btnMenu');
-  const navMenu = document.getElementById('navMenu');
+  <section id="ia" class="max-w-5xl mx-auto pb-24 px-6">
+    <div class="feature-card">
+      <h2 class="text-2xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-brain text-emerald-400"></i> <span data-lang-pt="Recursos com Inteligência Artificial" data-lang-en="AI-Powered Features" data-lang-es="Recursos con Inteligencia Artificial">Recursos com Inteligência Artificial</span></h2>
+      <p class="text-white/70" data-lang-pt="Com redes neurais e análise de comportamento, o NeuraGuard aprende continuamente para proteger contra novas ameaças cibernéticas." data-lang-en="Using neural networks and behavior analysis, NeuraGuard continuously learns to protect against new cyber threats." data-lang-es="Mediante redes neuronales y análisis de comportamiento, NeuraGuard aprende continuamente para proteger contra nuevas amenazas.">Com redes neurais e análise de comportamento, o NeuraGuard aprende continuamente para proteger contra novas ameaças cibernéticas.</p>
+    </div>
+  </section>
 
-  // Menu hamburguer toggle
-  btnMenu.addEventListener('click', () => {
-    navMenu.classList.toggle('show');
-    const aberto = navMenu.classList.contains('show');
-    btnMenu.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
-    btnMenu.textContent = aberto ? '✕' : '☰';
-  });
+  <footer class="bg-black/90 text-center text-white/60 py-6 text-sm border-t border-white/10">
+    &copy; 2025 NeuraGuard | Max Oliveira, Carlos Marques, Salvador Carvalho, Beatriz Ferreira
+  </footer>
 
-  // Fecha o menu ao clicar num link (mobile)
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      if(window.innerWidth <= 768) {
-        navMenu.classList.remove('show');
-        btnMenu.textContent = '☰';
-        btnMenu.setAttribute('aria-label', 'Abrir menu');
-      }
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#10b981" },
+        shape: { type: "circle" },
+        opacity: { value: 0.1, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#10b981", opacity: 0.1, width: 1 },
+        move: { enable: true, speed: 1, random: true, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" }, resize: true },
+        modes: { grab: { distance: 140, line_linked: { opacity: 0.3 } }, push: { particles_nb: 4 } }
+      },
+      retina_detect: true
     });
-  });
-</script>
+
+    // Animate cards
+    gsap.from(".feature-card", {
+      opacity: 0,
+      y: 40,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power4.out"
+    });
+
+    // Mobile menu animation
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      gsap.to(mobileMenu, { duration: 0.4, autoAlpha: 1, display: 'flex' });
+    });
+
+    closeMenu.addEventListener('click', () => {
+      gsap.to(mobileMenu, { duration: 0.3, autoAlpha: 0, onComplete: () => mobileMenu.classList.add('hidden') });
+    });
+
+    // Language switcher
+    const langBtn = document.getElementById('lang-switch');
+    const dropdown = document.getElementById('lang-dropdown');
+    const currentLang = document.getElementById('current-lang');
+
+    langBtn.addEventListener('click', () => {
+      dropdown.classList.toggle('hidden');
+    });
+
+    dropdown.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        currentLang.textContent = btn.textContent;
+        dropdown.classList.add('hidden');
+        document.querySelectorAll('[data-lang-' + lang + ']').forEach(el => {
+          el.innerHTML = el.getAttribute('data-lang-' + lang);
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
