@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Feedback - NeuraGuard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -186,27 +186,28 @@
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo NeuraGuard">
-  <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
-  <nav id="navMenu">
+  <img src="logo.png" alt="Logo NeuraGuard" />
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+    <i class="fas fa-bars"></i>
+  </button>
+  <nav id="navMenu" role="navigation" aria-label="Menu principal">
     <a href="index.html">Página Principal</a>
     <a href="sobre.html">Sobre</a>
     <a href="funcionalidades.html">Funcionalidades</a>
     <a href="comparacao.html">Comparação</a>
     <a href="precos.html">Preços</a>
-    <a href="feedback.html">Feedback</a>
   </nav>
-  <button class="btn-toggle" id="toggleDarkMode">Modo Escuro</button>
+  <button class="btn-toggle" id="toggleDarkMode" aria-pressed="false">Modo Escuro</button>
 </header>
 
 <div class="container">
   <h2>Envia-nos o teu feedback</h2>
   <form action="https://formspree.io/f/xovwdbko" method="POST">
     <label for="nome">Nome:</label>
-    <input type="text" name="nome" id="nome" required>
+    <input type="text" name="nome" id="nome" required />
 
     <label for="email">Email:</label>
-    <input type="email" name="email" id="email" required>
+    <input type="email" name="email" id="email" required />
 
     <label for="mensagem">Mensagem:</label>
     <textarea name="mensagem" id="mensagem" rows="6" required></textarea>
@@ -221,21 +222,47 @@
   const navMenu = document.getElementById('navMenu');
   const body = document.body;
 
-  // Aplica o modo escuro guardado
+  // Aplica o modo escuro guardado no localStorage
   if(localStorage.getItem('modoEscuro') === 'true') {
     body.classList.add('dark');
     toggleBtn.textContent = 'Modo Claro';
+    toggleBtn.setAttribute('aria-pressed', 'true');
   }
 
   toggleBtn.addEventListener('click', () => {
     body.classList.toggle('dark');
     const modoAtivo = body.classList.contains('dark');
     toggleBtn.textContent = modoAtivo ? 'Modo Claro' : 'Modo Escuro';
+    toggleBtn.setAttribute('aria-pressed', modoAtivo);
     localStorage.setItem('modoEscuro', modoAtivo);
   });
 
   menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('show');
+    const isOpen = navMenu.classList.toggle('show');
+    menuToggle.innerHTML = isOpen ? '&#10005;' : '<i class="fas fa-bars"></i>';
+    menuToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Fecha o menu se clicares fora (em mobile)
+  document.addEventListener('click', (e) => {
+    const clickDentroMenu = navMenu.contains(e.target);
+    const clickNoToggle = menuToggle.contains(e.target);
+    if(!clickDentroMenu && !clickNoToggle && navMenu.classList.contains('show')) {
+      navMenu.classList.remove('show');
+      menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      menuToggle.setAttribute('aria-expanded', false);
+    }
+  });
+
+  // Fecha o menu ao clicares num link (em mobile)
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if(navMenu.classList.contains('show')) {
+        navMenu.classList.remove('show');
+        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        menuToggle.setAttribute('aria-expanded', false);
+      }
+    });
   });
 </script>
 

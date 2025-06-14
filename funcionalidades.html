@@ -32,6 +32,7 @@
     nav {
       display: flex;
       gap: 20px;
+      transition: transform 0.3s ease-in-out;
     }
     nav a {
       color: #fff;
@@ -51,6 +52,7 @@
       font-weight: 600;
       transition: background-color 0.3s, color 0.3s;
       white-space: nowrap;
+      z-index: 1200;
     }
     .btn-toggle:hover {
       background-color: white;
@@ -59,11 +61,17 @@
 
     .menu-toggle {
       display: none;
-      font-size: 24px;
+      font-size: 28px;
       background: none;
       border: none;
       color: white;
       cursor: pointer;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 1300;
+      user-select: none;
+      padding: 5px;
     }
 
     .container {
@@ -133,23 +141,59 @@
     /* RESPONSIVO */
     @media (max-width: 768px) {
       nav {
-        display: none;
         flex-direction: column;
-        width: 100%;
-        margin-top: 10px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 250px;
+        padding: 70px 20px 20px;
         background-color: #0a0f2c;
+        transform: translateX(100%);
+        display: flex; /* mantém flex para layout */
+        gap: 15px;
+        transition: transform 0.3s ease-in-out;
+        z-index: 1200;
       }
       nav.show {
-        display: flex;
+        transform: translateX(0);
+      }
+      nav a {
+        font-size: 18px;
       }
       .menu-toggle {
         display: block;
       }
+      /* Ajusta o btn-toggle para ficar no canto inferior do menu no mobile */
       .btn-toggle {
-        margin-top: 10px;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1300;
+        margin-top: 0 !important;
       }
       header {
         flex-wrap: nowrap;
+      }
+    }
+
+    /* Desktop styles */
+    @media (min-width: 769px) {
+      nav {
+        position: static !important;
+        transform: none !important;
+        flex-direction: row;
+        height: auto;
+        width: auto;
+        padding: 0;
+        display: flex !important;
+      }
+      .menu-toggle {
+        display: none !important;
+      }
+      .btn-toggle {
+        position: static;
+        margin-left: 20px;
       }
     }
 
@@ -206,7 +250,7 @@
 
 <header>
   <img src="logo.png" alt="Logo NeuraGuard" />
-  <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMenu">&#9776;</button>
   <nav id="navMenu">
     <a href="index.html">Página Principal</a>
     <a href="sobre.html">Sobre</a>
@@ -214,7 +258,7 @@
     <a href="precos.html">Preços</a>
     <a href="feedback.html">Feedback</a>
   </nav>
-  <button class="btn-toggle" id="toggleDarkMode">Modo Escuro</button>
+  <button class="btn-toggle" id="toggleDarkMode" aria-pressed="false">Modo Escuro</button>
 </header>
 
 <div class="container">
@@ -281,20 +325,47 @@
   const body = document.body;
 
   // Aplica modo escuro guardado
-  if(localStorage.getItem('modoEscuro') === 'true') {
+  if(localStorage.getItem('darkMode') === 'enabled') {
     body.classList.add('dark');
     toggleBtn.textContent = 'Modo Claro';
+    toggleBtn.setAttribute('aria-pressed', 'true');
   }
 
   toggleBtn.addEventListener('click', () => {
     body.classList.toggle('dark');
-    const modoAtivo = body.classList.contains('dark');
-    toggleBtn.textContent = modoAtivo ? 'Modo Claro' : 'Modo Escuro';
-    localStorage.setItem('modoEscuro', modoAtivo);
+    const isDark = body.classList.contains('dark');
+    toggleBtn.textContent = isDark ? 'Modo Claro' : 'Modo Escuro';
+    toggleBtn.setAttribute('aria-pressed', isDark);
+    localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
   });
 
+  // Controla menu hamburguer mobile
   menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('show');
+    const isOpen = navMenu.classList.toggle('show');
+    menuToggle.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    menuToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Fecha o menu se clicares num link ou fora do menu (mobile)
+  document.addEventListener('click', (e) => {
+    const clickInsideMenu = navMenu.contains(e.target);
+    const clickOnToggle = menuToggle.contains(e.target);
+    if(!clickInsideMenu && !clickOnToggle && navMenu.classList.contains('show')) {
+      navMenu.classList.remove('show');
+      menuToggle.innerHTML = '&#9776;';
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Fecha menu ao clicares num link (mobile)
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if(navMenu.classList.contains('show')) {
+        navMenu.classList.remove('show');
+        menuToggle.innerHTML = '&#9776;';
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
   });
 </script>
 

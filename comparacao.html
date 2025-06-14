@@ -25,6 +25,7 @@
       top: 0;
       z-index: 1000;
       flex-wrap: wrap;
+      position: relative;
     }
     header img {
       height: 50px;
@@ -32,6 +33,7 @@
     nav {
       display: flex;
       gap: 20px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
     nav a {
       color: #fff;
@@ -54,6 +56,8 @@
       gap: 6px;
       font-weight: 600;
       margin-left: 20px;
+      white-space: nowrap;
+      transition: color 0.3s;
     }
     #darkModeToggle:hover {
       color: #f7931e;
@@ -66,30 +70,50 @@
       font-size: 28px;
       color: white;
       cursor: pointer;
-      margin-left: auto;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 1100;
+      transition: color 0.3s;
+    }
+    #menu-toggle:hover {
+      color: #f7931e;
     }
 
+    /* Mobile styles */
     @media (max-width: 768px) {
       header {
-        flex-direction: column;
-        align-items: flex-start;
+        padding: 15px 20px;
       }
       #menu-toggle {
         display: block;
       }
       nav {
-        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 250px;
+        background-color: #0a0f2c;
         flex-direction: column;
-        width: 100%;
-        gap: 10px;
-        margin-top: 10px;
+        padding: 80px 20px 20px 20px;
+        gap: 20px;
+        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+        transform: translateX(100%);
+        opacity: 0;
+        pointer-events: none;
       }
       nav.active {
-        display: flex;
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      nav a {
+        font-size: 18px;
       }
       #darkModeToggle {
-        margin-top: 10px;
         margin-left: 0;
+        margin-top: 10px;
       }
     }
 
@@ -145,6 +169,7 @@
       color: #1b1f4b;
     }
 
+    /* Dark mode */
     body.dark-mode {
       background-color: #121621;
       color: #ddd;
@@ -181,7 +206,7 @@
 
 <header>
   <img src="logo.png" alt="Logo NeuraGuard" />
-  <button id="menu-toggle">☰</button>
+  <button id="menu-toggle" aria-label="Abrir menu">☰</button>
   <nav>
     <a href="index.html">Página Principal</a>
     <a href="sobre.html">Sobre</a>
@@ -233,20 +258,55 @@
   const menuToggle = document.getElementById('menu-toggle');
   const nav = document.querySelector('nav');
 
-  toggleButton.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    const icon = toggleButton.querySelector('i');
-    if (document.body.classList.contains('dark-mode')) {
-      icon.classList.replace('fa-moon', 'fa-sun');
+  // Função para guardar o modo escuro no localStorage
+  function setDarkMode(enabled) {
+    if (enabled) {
+      document.body.classList.add('dark-mode');
       toggleButton.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+      localStorage.setItem('darkMode', 'enabled');
     } else {
-      icon.classList.replace('fa-sun', 'fa-moon');
+      document.body.classList.remove('dark-mode');
       toggleButton.innerHTML = '<i class="fas fa-moon"></i> Modo Escuro';
+      localStorage.setItem('darkMode', 'disabled');
+    }
+  }
+
+  // Verifica se existe preferência guardada no localStorage
+  if (localStorage.getItem('darkMode') === 'enabled') {
+    setDarkMode(true);
+  }
+
+  toggleButton.addEventListener('click', () => {
+    const isDark = document.body.classList.contains('dark-mode');
+    setDarkMode(!isDark);
+  });
+
+  // Alternar menu no mobile e mudar ícone
+  menuToggle.addEventListener('click', () => {
+    const isActive = nav.classList.toggle('active');
+    menuToggle.textContent = isActive ? '✕' : '☰';
+  });
+
+  // Fechar menu se clicares fora no mobile
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    const isClickInsideNav = nav.contains(target);
+    const isClickOnToggle = menuToggle.contains(target);
+
+    if (!isClickInsideNav && !isClickOnToggle && nav.classList.contains('active')) {
+      nav.classList.remove('active');
+      menuToggle.textContent = '☰';
     }
   });
 
-  menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('active');
+  // Fechar menu ao clicar num link no mobile
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        menuToggle.textContent = '☰';
+      }
+    });
   });
 </script>
 
