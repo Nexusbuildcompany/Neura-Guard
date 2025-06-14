@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Sobre - NeuraGuard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
   <style>
     * {
@@ -27,13 +27,17 @@
       justify-content: space-between;
       align-items: center;
       transition: background-color 0.3s, color 0.3s;
+      position: relative;
     }
     header img {
       height: 50px;
     }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
     nav a {
       color: #fff;
-      margin-left: 20px;
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s;
@@ -41,6 +45,34 @@
     nav a:hover {
       color: #f7931e;
     }
+    .btn-toggle {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s;
+      z-index: 101;
+    }
+    .btn-toggle:hover {
+      background-color: white;
+      color: #0a0f2c;
+    }
+    /* Botão do menu hamburguer (aparece só em mobile) */
+    #btnMenu {
+      display: none;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+      margin-left: 15px;
+      z-index: 102;
+    }
+
+    /* Container */
     .container {
       max-width: 1000px;
       margin: 60px auto;
@@ -103,20 +135,6 @@
       margin-top: 60px;
       transition: background-color 0.3s, color 0.3s;
     }
-    .btn-toggle {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .btn-toggle:hover {
-      background-color: white;
-      color: #0a0f2c;
-    }
 
     /* Modo Escuro */
     body.dark {
@@ -168,13 +186,45 @@
       background-color: #1b1f4b;
       color: #ddd;
     }
+
+    /* Mobile - esconder nav e mostrar botão hamburguer */
+    @media (max-width: 768px) {
+      nav {
+        position: fixed;
+        top: 70px;
+        right: 0;
+        background-color: #0a0f2c;
+        height: calc(100% - 70px);
+        width: 220px;
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 100;
+      }
+      nav.show {
+        transform: translateX(0);
+      }
+      nav a {
+        font-size: 18px;
+        margin-left: 0;
+      }
+      #btnMenu {
+        display: block;
+      }
+      .btn-toggle {
+        order: 2;
+      }
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo NeuraGuard">
-  <nav>
+  <img src="logo.png" alt="Logo NeuraGuard" />
+  <button id="btnMenu" aria-label="Abrir menu">&#9776;</button>
+  <nav id="navMenu">
     <a href="index.html">Página Principal</a>
     <a href="funcionalidades.html">Funcionalidades</a>
     <a href="comparacao.html">Comparação</a>
@@ -186,7 +236,7 @@
 
 <div class="container">
   <h1><i class="fas fa-info-circle"></i> Sobre o NeuraGuard</h1>
-  
+
   <p>O <strong>NeuraGuard</strong> é mais do que um antivírus — é uma solução inteligente e autónoma que protege os teus dispositivos de ameaças digitais, utilizando algoritmos avançados de inteligência artificial.</p>
 
   <h2><i class="fas fa-bullseye"></i> Missão</h2>
@@ -226,17 +276,45 @@
 <script>
   const toggleBtn = document.getElementById('toggleDarkMode');
   const body = document.body;
+  const btnMenu = document.getElementById('btnMenu');
+  const navMenu = document.getElementById('navMenu');
 
-  if(localStorage.getItem('modoEscuro') === 'true') {
-    body.classList.add('dark');
-    toggleBtn.textContent = 'Modo Claro';
+  // Função para ativar/desativar modo escuro e guardar preferência
+  function setDarkMode(isDark) {
+    if (isDark) {
+      body.classList.add('dark');
+      localStorage.setItem('modoEscuro', 'true');
+      toggleBtn.textContent = 'Modo Claro';
+    } else {
+      body.classList.remove('dark');
+      localStorage.setItem('modoEscuro', 'false');
+      toggleBtn.textContent = 'Modo Escuro';
+    }
   }
 
+  // Verifica preferência guardada ao carregar a página
+  if (localStorage.getItem('modoEscuro') === 'true') {
+    setDarkMode(true);
+  } else {
+    setDarkMode(false);
+  }
+
+  // Evento do botão modo escuro
   toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    const modoAtivo = body.classList.contains('dark');
-    toggleBtn.textContent = modoAtivo ? 'Modo Claro' : 'Modo Escuro';
-    localStorage.setItem('modoEscuro', modoAtivo);
+    const isDark = body.classList.contains('dark');
+    setDarkMode(!isDark);
+  });
+
+  // Menu hamburguer toggle
+  btnMenu.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+  });
+
+  // Fecha menu se clicares fora (mobile)
+  document.addEventListener('click', (e) => {
+    if (!navMenu.contains(e.target) && e.target !== btnMenu) {
+      navMenu.classList.remove('show');
+    }
   });
 </script>
 
