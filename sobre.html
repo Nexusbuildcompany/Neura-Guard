@@ -7,7 +7,51 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
   <style>
-    /* ... mantém todo o teu CSS anterior ... */
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f4f4;
+      color: #222;
+    }
+
+    header {
+      background-color: #0a0f2c;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      position: relative;
+      z-index: 100;
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    footer {
+      background-color: #0a0f2c;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
 
     /* Mobile */
     @media (max-width: 768px) {
@@ -32,7 +76,7 @@
         width: 220px;
         background-color: #0a0f2c;
         flex-direction: column;
-        padding: 70px 20px 20px 20px; /* deixa espaço para header e botão */
+        padding: 70px 20px 20px 20px;
         gap: 15px;
         transform: translateX(100%);
         transition: transform 0.3s ease-in-out;
@@ -78,7 +122,6 @@
     <a href="precos.html">Preços</a>
     <a href="feedback.html">Feedback</a>
   </nav>
-  <button class="btn-toggle" id="toggleDarkMode">Modo Escuro</button>
 </header>
 
 <div class="container">
@@ -90,57 +133,24 @@
 </footer>
 
 <script>
-  const toggleBtn = document.getElementById('toggleDarkMode');
-  const body = document.body;
   const btnMenu = document.getElementById('btnMenu');
   const navMenu = document.getElementById('navMenu');
 
-  // Função para ativar/desativar modo escuro e guardar preferência
-  function setDarkMode(isDark) {
-    if (isDark) {
-      body.classList.add('dark');
-      localStorage.setItem('modoEscuro', 'true');
-      toggleBtn.textContent = 'Modo Claro';
-    } else {
-      body.classList.remove('dark');
-      localStorage.setItem('modoEscuro', 'false');
-      toggleBtn.textContent = 'Modo Escuro';
-    }
-  }
-
-  // Verifica preferência guardada ao carregar a página
-  if (localStorage.getItem('modoEscuro') === 'true') {
-    setDarkMode(true);
-  } else {
-    setDarkMode(false);
-  }
-
-  // Evento do botão modo escuro
-  toggleBtn.addEventListener('click', () => {
-    const isDark = body.classList.contains('dark');
-    setDarkMode(!isDark);
-  });
-
   // Menu hamburguer toggle
   btnMenu.addEventListener('click', () => {
-    const isOpen = navMenu.classList.toggle('show');
-    btnMenu.innerHTML = isOpen ? '&times;' : '&#9776;'; // ✕ ou ☰
+    navMenu.classList.toggle('show');
+    const aberto = navMenu.classList.contains('show');
+    btnMenu.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+    btnMenu.textContent = aberto ? '✕' : '☰';
   });
 
-  // Fecha menu se clicares fora (mobile)
-  document.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && e.target !== btnMenu) {
-      navMenu.classList.remove('show');
-      btnMenu.innerHTML = '&#9776;';
-    }
-  });
-
-  // Fecha menu quando clicas num link (mobile)
+  // Fecha o menu ao clicar num link (mobile)
   navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
+      if(window.innerWidth <= 768) {
         navMenu.classList.remove('show');
-        btnMenu.innerHTML = '&#9776;';
+        btnMenu.textContent = '☰';
+        btnMenu.setAttribute('aria-label', 'Abrir menu');
       }
     });
   });
