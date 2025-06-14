@@ -98,6 +98,24 @@
     &copy; 2025 NeuraGuard | Max Oliveira, Carlos Marques, Salvador Carvalho, Beatriz Ferreira
   </footer>
 
+  <!-- Botão de menu mobile -->
+<button id="menu-btn" class="md:hidden text-xl" aria-label="Abrir menu">
+  <i class="fas fa-bars"></i>
+</button>
+</header>
+
+<!-- Menu Mobile -->
+<div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 z-50 flex flex-col items-center justify-center space-y-6 text-lg opacity-0">
+  <button id="close-menu" class="absolute top-4 right-4 text-2xl" aria-label="Fechar menu">
+    <i class="fas fa-times"></i>
+  </button>
+  <a href="index.html" class="hover:text-emerald-400" data-lang-pt="Página Principal" data-lang-en="Home" data-lang-es="Inicio">Página Principal</a>
+  <a href="sobre.html" class="hover:text-emerald-400" data-lang-pt="Sobre" data-lang-en="About" data-lang-es="Sobre">Sobre</a>
+  <a href="funcionalidades.html" class="hover:text-emerald-400" data-lang-pt="Funcionalidades" data-lang-en="Features" data-lang-es="Funcionalidades">Funcionalidades</a>
+  <a href="comparacao.html" class="hover:text-emerald-400" data-lang-pt="Comparação" data-lang-en="Comparison" data-lang-es="Comparación">Comparação</a>
+  <a href="feedback.html" class="hover:text-emerald-400" data-lang-pt="Feedback" data-lang-en="Feedback" data-lang-es="Comentarios">Feedback</a>
+</div>
+
   <script>
     particlesJS("particles-js", {
       particles: {
@@ -125,14 +143,7 @@
       ease: "power4.out"
     });
 
-    // Mobile menu animation
-    const menuBtn = document.getElementById('menu-btn');
-    const closeMenu = document.getElementById('close-menu');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    menuBtn.addEventListener('click', () => {
-      gsap.to(mobileMenu, { duration: 0.4, autoAlpha: 1, display: 'flex' });
-    });
+    
 
     closeMenu.addEventListener('click', () => {
       gsap.to(mobileMenu, { duration: 0.3, autoAlpha: 0, onComplete: () => mobileMenu.classList.add('hidden') });
