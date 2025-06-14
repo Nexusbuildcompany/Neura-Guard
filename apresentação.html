@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apresentação - NeuraGuard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      pointer-events: none;
+      text-align: center;
+    }
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      z-index: 10;
+    }
+    .nav-btn {
+      background-color: #10b981;
+      color: white;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      margin: 0 0.25rem;
+      transition: background-color 0.3s;
+    }
+    .nav-btn:hover {
+      background-color: #059669;
+    }
+    .controls {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 50;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .slide-counter {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      font-weight: 600;
+    }
+    .progress {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 50;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 9999px;
+      background-color: rgba(255, 255, 255, 0.3);
+      transition: background 0.3s;
+    }
+    .dot.active {
+      background-color: #10b981;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Controles -->
+  <div class="controls">
+    <button id="prevBtn" class="nav-btn"><i class="fas fa-arrow-left"></i></button>
+    <button id="nextBtn" class="nav-btn"><i class="fas fa-arrow-right"></i></button>
+    <button id="fsBtn" class="nav-btn"><i class="fas fa-expand"></i></button>
+  </div>
+
+  <div class="slide-counter" id="counter">1 / 10</div>
+  <div class="progress" id="progress"></div>
+
+  <!-- Slides -->
+  <div id="slides">
+    <div class="slide active"><h1 class="text-5xl font-bold mb-4"><i class="fas fa-shield-alt text-emerald-400"></i> NeuraGuard</h1><p class="text-xl text-white/80">A evolução da segurança digital com IA.</p></div>
+    <div class="slide"><h2 class="text-4xl mb-3"><i class="fas fa-brain text-emerald-400"></i> Inteligência Artificial</h2><p class="text-lg text-white/70">Análise inteligente de ameaças com resposta automática.</p></div>
+    <div class="slide"><h2 class="text-4xl mb-3"><i class="fas fa-shield-virus text-emerald-400"></i> Anti‑Ransomware</h2><p class="text-lg text-white/70">Defesa ativa e proteção em tempo real.</p></div>
+    <div class="slide"><h2 class="text-4xl mb-3"><i class="fas fa-cloud-upload-alt text-emerald-400"></i> Backup Seguro</h2><p class="text-lg text-white/70">Backups criptografados na nuvem.</p></div>
+    <div class="slide"><h2 class="text-4xl mb-3"><i class="fas fa-user-secret text-emerald-400"></i> Privacidade Blindada</h2><p class="text-lg text-white/70">Modo privado e gestão de permissões.</p></div>
+    <div class="slide"><h2 class="text-4xl mb-3"><i class="fas fa-mobile-alt text-emerald-400"></i> Multi‑Plataforma</h2><p class="text-lg text-white/70">Compatível com Windows, macOS, Android e iOS.</p></div>
+    <div class="slide"><h2 class="text-4xl mb-3"><i class="fas fa-sync-alt text-emerald-400"></i> Atualizações Inteligentes</h2><p class="text-lg text-white/70">NeuraGuard aprende e adapta-se.</p></div>
+    <div class="slide"><h2 class="text-4xl mb-3"><i class="fas fa-chart-line text-emerald-400"></i> Resultados Visíveis</h2><p class="text-lg text-white/70">+10.000 dispositivos protegidos.</p></div>
+    <div class="slide"><h2 class="text-4xl mb-3"><i class="fas fa-headset text-emerald-400"></i> Suporte 24/7</h2><p class="text-lg text-white/70">Ajuda a qualquer hora.</p></div>
+    <div class="slide"><h2 class="text-4xl font-bold mb-3"><i class="fas fa-thumbs-up text-emerald-400"></i> Obrigado!</h2><p class="text-lg text-white/80">Confia no NeuraGuard para te proteger.</p></div>
+  </div>
+
+  <!-- Script colocado no fim do body -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const slides = document.querySelectorAll('.slide');
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const fsBtn = document.getElementById('fsBtn');
+      const counter = document.getElementById('counter');
+      const progress = document.getElementById('progress');
+      let current = 0;
+
+      function updateSlide() {
+        slides.forEach((s, i) => {
+          s.classList.toggle('active', i === current);
+        });
+        counter.textContent = `${current + 1} / ${slides.length}`;
+
+        progress.innerHTML = '';
+        slides.forEach((_, i) => {
+          const dot = document.createElement('div');
+          dot.className = 'dot' + (i === current ? ' active' : '');
+          progress.appendChild(dot);
+        });
+      }
+
+      nextBtn.onclick = () => {
+        current = (current + 1) % slides.length;
+        updateSlide();
+      };
+
+      prevBtn.onclick = () => {
+        current = (current - 1 + slides.length) % slides.length;
+        updateSlide();
+      };
+
+      fsBtn.onclick = () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          document.exitFullscreen();
+        }
+      };
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextBtn.click();
+        if (e.key === 'ArrowLeft') prevBtn.click();
+      });
+
+      updateSlide();
+    });
+  </script>
+
+</body>
+</html>
