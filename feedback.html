@@ -7,14 +7,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a2d9c6b3da.js" crossorigin="anonymous"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f4f6fc;
       color: #222;
       line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
     }
+
     header {
       background-color: #0a0f2c;
       color: white;
@@ -22,30 +22,30 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      flex-wrap: wrap;
       position: relative;
+      z-index: 101;
     }
+
     header img {
       height: 50px;
     }
+
     nav {
       display: flex;
       gap: 20px;
     }
+
     nav a {
-      color: #fff;
+      color: white;
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s;
     }
+
     nav a:hover {
       color: #f7931e;
     }
 
-    /* CSS do #btnMenu */
     #btnMenu {
       background: transparent;
       border: none;
@@ -63,9 +63,36 @@
       user-select: none;
       z-index: 110;
     }
+
     #btnMenu:hover {
       background-color: transparent;
       color: #ffffff;
+    }
+
+    /* Menu lateral no mobile */
+    @media (max-width: 768px) {
+      nav {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        height: 100%;
+        width: 250px;
+        background-color: #0a0f2c;
+        flex-direction: column;
+        padding: 70px 20px 20px;
+        gap: 25px;
+        transition: right 0.3s ease;
+        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+        z-index: 100;
+      }
+
+      nav.show {
+        right: 0;
+      }
+
+      #btnMenu {
+        display: block;
+      }
     }
 
     .container {
@@ -77,22 +104,26 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       transition: background-color 0.3s, color 0.3s;
     }
+
     h2 {
       text-align: center;
       color: #1b1f4b;
       margin-bottom: 20px;
       transition: color 0.3s;
     }
+
     form {
       display: flex;
       flex-direction: column;
     }
+
     label {
       margin-top: 15px;
       font-weight: bold;
       color: #1b1f4b;
       transition: color 0.3s;
     }
+
     input, textarea {
       padding: 12px;
       margin-top: 5px;
@@ -101,6 +132,7 @@
       font-family: 'Inter', sans-serif;
       transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     }
+
     button[type="submit"] {
       background-color: #f7931e;
       color: white;
@@ -113,26 +145,9 @@
       font-family: 'Inter', sans-serif;
       transition: background-color 0.3s;
     }
+
     button[type="submit"]:hover {
       background-color: #d86d00;
-    }
-
-    /* Responsivo */
-    @media (max-width: 768px) {
-      nav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        margin-top: 10px;
-        background-color: #0a0f2c;
-      }
-      nav.show {
-        display: flex;
-      }
-      /* Mostrar o btnMenu em mobile */
-      #btnMenu {
-        display: block;
-      }
     }
   </style>
 </head>
@@ -140,9 +155,6 @@
 
 <header>
   <img src="logo.png" alt="Logo NeuraGuard" />
-  <button id="btnMenu" aria-label="Abrir menu">
-    ☰
-  </button>
   <nav id="navMenu" role="navigation" aria-label="Menu principal">
     <a href="index.html">Página Principal</a>
     <a href="sobre.html">Sobre</a>
@@ -150,6 +162,7 @@
     <a href="comparacao.html">Comparação</a>
     <a href="precos.html">Preços</a>
   </nav>
+  <button id="btnMenu" aria-label="Abrir menu">&#9776;</button>
 </header>
 
 <div class="container">
@@ -181,7 +194,7 @@
 
   navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      if(window.innerWidth <= 768) {
+      if (window.innerWidth <= 768) {
         navMenu.classList.remove('show');
         btnMenu.textContent = '☰';
         btnMenu.setAttribute('aria-label', 'Abrir menu');
