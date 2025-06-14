@@ -56,7 +56,23 @@
       <a href="comparacao.html" class="hover:text-emerald-400" data-lang-pt="Comparação" data-lang-en="Comparison" data-lang-es="Comparación">Comparação</a>
       <a href="feedback.html" class="hover:text-emerald-400" data-lang-pt="Feedback" data-lang-en="Feedback" data-lang-es="Comentarios">Feedback</a>
     </nav>
+    <!-- ✅ Botão de menu mobile dentro do header -->
+    <button id="menu-btn" class="md:hidden text-xl" aria-label="Abrir menu">
+      <i class="fas fa-bars"></i>
+    </button>
   </header>
+
+  <!-- ✅ Menu Mobile -->
+  <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 z-50 flex flex-col items-center justify-center space-y-6 text-lg opacity-0">
+    <button id="close-menu" class="absolute top-4 right-4 text-2xl" aria-label="Fechar menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <a href="index.html" class="hover:text-emerald-400" data-lang-pt="Página Principal" data-lang-en="Home" data-lang-es="Inicio">Página Principal</a>
+    <a href="sobre.html" class="hover:text-emerald-400" data-lang-pt="Sobre" data-lang-en="About" data-lang-es="Sobre">Sobre</a>
+    <a href="funcionalidades.html" class="hover:text-emerald-400" data-lang-pt="Funcionalidades" data-lang-en="Features" data-lang-es="Funcionalidades">Funcionalidades</a>
+    <a href="comparacao.html" class="hover:text-emerald-400" data-lang-pt="Comparação" data-lang-en="Comparison" data-lang-es="Comparación">Comparação</a>
+    <a href="feedback.html" class="hover:text-emerald-400" data-lang-pt="Feedback" data-lang-en="Feedback" data-lang-es="Comentarios">Feedback</a>
+  </div>
 
   <section class="text-center py-16 px-6">
     <h1 class="text-4xl font-bold mb-4" data-lang-pt="Planos e Preços" data-lang-en="Plans and Pricing" data-lang-es="Planes y Precios">
@@ -66,55 +82,37 @@
   </section>
 
   <section class="max-w-6xl mx-auto px-6 pb-20 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-    <div class="pricing-card text-center">
-      <i class="fas fa-user text-4xl text-emerald-400 mb-4"></i>
-      <h2 class="text-xl font-semibold mb-2" data-lang-pt="Plano Pessoal" data-lang-en="Personal Plan" data-lang-es="Plan Personal">Plano Pessoal</h2>
-      <p class="text-white/70 mb-3">Protecção completa para 1 dispositivo, com inteligência artificial, firewall e detecção em tempo real.</p>
-      <div class="text-3xl font-bold text-emerald-400">€4,99 / mês</div>
-      <div class="text-sm text-white/50">Anualidade: €49,90</div>
-      <a href="#" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 mt-4 rounded-lg font-semibold transition">Subscrever</a>
-    </div>
+      <div class="pricing-card text-center">
+    <i class="fas fa-user text-4xl text-emerald-400 mb-4"></i>
+    <h2 class="text-xl font-semibold mb-2" data-lang-pt="Plano Pessoal" data-lang-en="Personal Plan" data-lang-es="Plan Personal">Plano Pessoal</h2>
+    <p class="text-white/70 mb-3">Protecção completa para 1 dispositivo, com inteligência artificial, firewall e detecção em tempo real.</p>
+    <div class="text-3xl font-bold text-emerald-400">€4,99 / mês</div>
+    <div class="text-sm text-white/50">Anualidade: €49,90</div>
+    <a href="#" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 mt-4 rounded-lg font-semibold transition">Subscrever</a>
+  </div>
 
-    <div class="pricing-card text-center">
-      <i class="fas fa-users text-4xl text-emerald-400 mb-4"></i>
-      <h2 class="text-xl font-semibold mb-2">Plano Familiar</h2>
-      <p class="text-white/70 mb-3">Ideal para famílias – protege até 5 dispositivos com controlo parental e sincronização entre plataformas.</p>
-      <div class="text-3xl font-bold text-emerald-400">€9,99 / mês</div>
-      <div class="text-sm text-white/50">Anualidade: €99,90</div>
-      <a href="#" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 mt-4 rounded-lg font-semibold transition">Subscrever</a>
-    </div>
+  <div class="pricing-card text-center">
+    <i class="fas fa-users text-4xl text-emerald-400 mb-4"></i>
+    <h2 class="text-xl font-semibold mb-2" data-lang-pt="Plano Familiar" data-lang-en="Family Plan" data-lang-es="Plan Familiar">Plano Familiar</h2>
+    <p class="text-white/70 mb-3">Ideal para famílias – protege até 5 dispositivos com controlo parental e sincronização entre plataformas.</p>
+    <div class="text-3xl font-bold text-emerald-400">€9,99 / mês</div>
+    <div class="text-sm text-white/50">Anualidade: €99,90</div>
+    <a href="#" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 mt-4 rounded-lg font-semibold transition">Subscrever</a>
+  </div>
 
-    <div class="pricing-card text-center">
-      <i class="fas fa-building text-4xl text-emerald-400 mb-4"></i>
-      <h2 class="text-xl font-semibold mb-2">Plano Empresas</h2>
-      <p class="text-white/70 mb-3">Para equipas e escritórios – inclui gestão centralizada, suporte prioritário e proteção avançada.</p>
-      <div class="text-3xl font-bold text-emerald-400">€19,99 / mês</div>
-      <div class="text-sm text-white/50">Anualidade: €199,90</div>
-      <a href="#" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 mt-4 rounded-lg font-semibold transition">Contactar</a>
-    </div>
+  <div class="pricing-card text-center">
+    <i class="fas fa-building text-4xl text-emerald-400 mb-4"></i>
+    <h2 class="text-xl font-semibold mb-2" data-lang-pt="Plano Empresas" data-lang-en="Business Plan" data-lang-es="Plan Empresas">Plano Empresas</h2>
+    <p class="text-white/70 mb-3">Para equipas e escritórios – inclui gestão centralizada, suporte prioritário e proteção avançada.</p>
+    <div class="text-3xl font-bold text-emerald-400">€19,99 / mês</div>
+    <div class="text-sm text-white/50">Anualidade: €199,90</div>
+    <a href="#" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 mt-4 rounded-lg font-semibold transition">Contactar</a>
+  </div>
   </section>
 
   <footer class="bg-black/90 text-center text-white/60 py-6 text-sm border-t border-white/10">
     &copy; 2025 NeuraGuard | Max Oliveira, Carlos Marques, Salvador Carvalho, Beatriz Ferreira
   </footer>
-
-  <!-- Botão de menu mobile -->
-<button id="menu-btn" class="md:hidden text-xl" aria-label="Abrir menu">
-  <i class="fas fa-bars"></i>
-</button>
-</header>
-
-<!-- Menu Mobile -->
-<div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-black/90 z-50 flex flex-col items-center justify-center space-y-6 text-lg opacity-0">
-  <button id="close-menu" class="absolute top-4 right-4 text-2xl" aria-label="Fechar menu">
-    <i class="fas fa-times"></i>
-  </button>
-  <a href="index.html" class="hover:text-emerald-400" data-lang-pt="Página Principal" data-lang-en="Home" data-lang-es="Inicio">Página Principal</a>
-  <a href="sobre.html" class="hover:text-emerald-400" data-lang-pt="Sobre" data-lang-en="About" data-lang-es="Sobre">Sobre</a>
-  <a href="funcionalidades.html" class="hover:text-emerald-400" data-lang-pt="Funcionalidades" data-lang-en="Features" data-lang-es="Funcionalidades">Funcionalidades</a>
-  <a href="comparacao.html" class="hover:text-emerald-400" data-lang-pt="Comparação" data-lang-en="Comparison" data-lang-es="Comparación">Comparação</a>
-  <a href="feedback.html" class="hover:text-emerald-400" data-lang-pt="Feedback" data-lang-en="Feedback" data-lang-es="Comentarios">Feedback</a>
-</div>
 
   <script>
     particlesJS("particles-js", {
@@ -143,10 +141,21 @@
       ease: "power4.out"
     });
 
-    
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+      gsap.fromTo(mobileMenu, { autoAlpha: 0 }, { duration: 0.4, autoAlpha: 1 });
+    });
 
     closeMenu.addEventListener('click', () => {
-      gsap.to(mobileMenu, { duration: 0.3, autoAlpha: 0, onComplete: () => mobileMenu.classList.add('hidden') });
+      gsap.to(mobileMenu, {
+        duration: 0.3,
+        autoAlpha: 0,
+        onComplete: () => mobileMenu.classList.add('hidden')
+      });
     });
 
     const langBtn = document.getElementById('lang-switch');
