@@ -47,15 +47,14 @@
     .nav-btn:hover {
       background-color: #059669;
     }
-  .controls {
-    position: fixed;
-    bottom: 1rem; /* Agora está embaixo */
-    left: 1rem;
-    z-index: 50;
-    display: flex;
-    gap: 0.5rem;
-}
-
+    .controls {
+      position: fixed;
+      bottom: 1rem;
+      left: 1rem;
+      z-index: 50;
+      display: flex;
+      gap: 0.5rem;
+    }
     .slide-counter {
       position: fixed;
       top: 1rem;
@@ -85,17 +84,16 @@
 </head>
 <body>
   <!-- Logo fixa -->
-<div class="fixed top-4 left-4 z-50">
-  <img src="logo.png" alt="Logo NeuraGuard" class="w-16 md:w-20 drop-shadow-xl">
-</div>
+  <div class="fixed top-4 left-4 z-50">
+    <img src="logo.png" alt="Logo NeuraGuard" class="w-16 md:w-20 drop-shadow-xl">
+  </div>
 
-<!-- Botão Voltar ao site -->
-<div class="fixed top-4 right-20 z-50">
-  <a href="index.html" class="nav-btn flex items-center gap-2">
-    <i class="fas fa-home"></i> Voltar ao site
-  </a>
-</div>
-
+  <!-- Botão Voltar ao site -->
+  <div class="fixed top-4 right-20 z-50">
+    <a href="index.html" class="nav-btn flex items-center gap-2">
+      <i class="fas fa-home"></i> Voltar ao site
+    </a>
+  </div>
 
   <!-- Controles -->
   <div class="controls">
@@ -104,12 +102,12 @@
     <button id="fsBtn" class="nav-btn"><i class="fas fa-expand"></i></button>
   </div>
 
-  <div class="slide-counter" id="counter">1 / 10</div>
+  <div class="slide-counter" id="counter"></div>
   <div class="progress" id="progress"></div>
 
   <!-- Slides -->
   <div id="slides">
-  <!-- Slide 1: Boas-vindas -->
+    <!-- Slide 1: Boas-vindas -->
   <div class="slide active">
     <h1 class="text-5xl font-bold mb-4">
       <i class="fas fa-shield-alt text-emerald-400"></i> NeuraGuard
@@ -194,9 +192,9 @@
     <p class="text-lg text-white/80">Confia no NeuraGuard para te proteger.</p>
   </div>
 </div>
+  </div>
 
-
-  <!-- Script colocado no fim do body -->
+  <!-- Script no fim do body -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const slides = document.querySelectorAll('.slide');
@@ -219,6 +217,11 @@
           dot.className = 'dot' + (i === current ? ' active' : '');
           progress.appendChild(dot);
         });
+      }
+
+      window.goToSlide = function (index) {
+        current = index % slides.length;
+        updateSlide();
       }
 
       nextBtn.onclick = () => {
@@ -247,6 +250,6 @@
       updateSlide();
     });
   </script>
-
 </body>
 </html>
+
